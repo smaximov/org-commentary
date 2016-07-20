@@ -1,0 +1,73 @@
+#+DRAWERS: NOEXPORT
+#+OPTIONS: d:(not "NOEXPORT")
+* org-doc
+
+:NOEXPORT:
+[[http://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
+[[https://travis-ci.org/smaximov/org-doc][https://travis-ci.org/smaximov/org-doc.svg?branch=master]]
+[[https://coveralls.io/github/smaximov/org-doc?branch=master][https://coveralls.io/repos/github/smaximov/org-doc/badge.svg?branch=master]]
+:END:
+
+=org-doc= — convert Org mode content to elisp comment header.
+
+** Installation
+
+FIXME: to be written.
+
+** Usage
+
+*** Inside Emacs
+
+First you need to load =org-doc=:
+
+#+begin_src elisp
+  (require 'org-doc)
+#+end_src
+
+Then you can interactively call =org-doc:update-file-header=.
+
+*** From the command line
+
+FIXME: to be written.
+
+** Contributing                                                    :noexport:
+
+*** Prerequisites
+
+You need [[https://github.com/cask/cask][Cask]] installed (see [[http://cask.readthedocs.io/en/latest/guide/installation.html][docs]]).
+
+*** Setup
+
+Clone the repository:
+
+#+begin_src bash
+  $ git clone git@github.com:smaximov/org-doc.git
+#+end_src
+
+Install dependencies:
+
+#+begin_src bash
+  $ cask install
+#+end_src
+
+*** Preparing pull request
+
+Make sure all tests pass:
+
+#+begin_src bash
+  $ cask exec buttercup -L . -L tests
+#+end_src
+
+Update package's commentary header if you have made changes to [[file:README.org][README.org]] (do not edit commentary by hand!):
+
+#+begin_src bash
+  $ cask emacs --batch -L . -l org-doc --eval \
+    '(message "%s" (org-doc:update-file-header "commentary" "README.org" "org-doc.el"))'
+#+end_src
+
+Commit final changes and create a pull request, describing briefly what it does.
+
+** License                                                         :noexport:
+
+This program is distributed under the terms of GNU General Public License,
+version 3 or any later version. See [[file:COPYING][COPYING]] for details.
