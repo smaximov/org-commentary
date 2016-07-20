@@ -33,6 +33,7 @@
 ;; .. 1.2 Usage
 ;; ..... 1.2.1 Inside Emacs
 ;; ..... 1.2.2 From the command line
+;; .. 1.3 Similar projects
 
 
 ;; 1 org-doc
@@ -66,6 +67,15 @@
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   FIXME: to be written.
+
+
+;; 1.3 Similar projects
+;; ────────────────────
+
+;;   • [org2elcomment] (available on MELPA).
+
+
+;;   [org2elcomment] https://github.com/cute-jumper/org2elcomment
 
 ;;; Code:
 

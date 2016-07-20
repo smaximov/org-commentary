@@ -67,6 +67,10 @@ Update package's commentary header if you have made changes to [[file:README.org
 
 Commit final changes and create a pull request, describing briefly what it does.
 
+** Similar projects
+
+- [[https://github.com/cute-jumper/org2elcomment][org2elcomment]] (available on MELPA).
+
 ** License                                                         :noexport:
 
 This program is distributed under the terms of GNU General Public License,
