@@ -75,18 +75,16 @@ This subtree won't be exported!
         (with-temp-buffer
           (insert buffer-content)
           (setf export-result (org-doc::export-buffer-as-string))
-          (expect (-contains? (string-to-list export-result)
-                              (cadr (assoc 'utf-8 org-ascii-underline)))
-                  :to-be-truthy)))
+          (expect export-result :to-match
+                  (rx-to-string `(char ,@ (cdr (assoc 'utf-8 org-ascii-underline)))))))
 
       (it "should be possible to change the export mode using `org-doc:export-charset'"
         (with-temp-buffer
           (insert buffer-content)
           (let ((org-doc:export-charset 'latin1))
             (setf export-result (org-doc::export-buffer-as-string)))
-          (expect (-contains? (string-to-list export-result)
-                              (cadr (assoc 'latin1 org-ascii-underline)))
-                  :to-be-truthy))))
+          (expect export-result :to-match
+                  (rx-to-string `(char ,@ (cdr (assoc 'latin1 org-ascii-underline))))))))
 
     (describe "Excluding"
       (it "should exclude the content of specific drawers"
