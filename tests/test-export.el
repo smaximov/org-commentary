@@ -56,7 +56,12 @@ This subtree won't be exported!
         (setf export-result (org-doc::export-buffer-as-string))
         (expect (string-match-p "^[^[:space:]]" export-result)
                 :to-be 0)
-        (expect (string-match-p "^[^[:space:]]" (reverse export-result))
+        (expect (string-match-p "^[^[:space:]]"
+                                (if (version< emacs-version "25")
+                                    (string-reverse export-result)
+                                  ;; `string-reverse' is an alias for `reverse'
+                                  ;; in Emacs 25 and is obsolete since 25.1.
+                                  (reverse export-result)))
                 :to-be 0)))
 
     (it "should generate the table of contents by default"
@@ -70,8 +75,8 @@ This subtree won't be exported!
         (with-temp-buffer
           (insert buffer-content)
           (setf export-result (org-doc::export-buffer-as-string))
-          (expect (seq-contains export-result
-                                (cadr (assoc 'utf-8 org-ascii-underline)))
+          (expect (-contains? (string-to-list export-result)
+                              (cadr (assoc 'utf-8 org-ascii-underline)))
                   :to-be-truthy)))
 
       (it "should be possible to change the export mode using `org-doc:export-charset'"
@@ -79,8 +84,8 @@ This subtree won't be exported!
           (insert buffer-content)
           (let ((org-doc:export-charset 'latin1))
             (setf export-result (org-doc::export-buffer-as-string)))
-          (expect (seq-contains export-result
-                                (cadr (assoc 'latin1 org-ascii-underline)))
+          (expect (-contains? (string-to-list export-result)
+                              (cadr (assoc 'latin1 org-ascii-underline)))
                   :to-be-truthy))))
 
     (describe "Excluding"
