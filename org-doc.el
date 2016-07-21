@@ -84,6 +84,8 @@
 (require 'org-doc-headers)
 (require 'org-doc-util)
 
+(defconst org-doc:version "0.1.0")
+
 (defun org-doc:update-file-header (section-name org elisp)
   "Update the file header using the content of an Org document.
 
