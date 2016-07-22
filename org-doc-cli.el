@@ -39,9 +39,8 @@ Flags:
     -v, --version    display version information
 
 Options:
-    -s, --section <section>    specify which comment section to update
-                               [values: commentary, changelog]
-                               [default: commentary]"
+    -s, --section [commentary]    specify which comment section to update
+                                  [values: commentary, changelog, history]"
           org-doc:version))
 
 (define-error 'org-doc::cli-argument-error
