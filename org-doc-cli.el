@@ -37,6 +37,8 @@ Usage:
 Flags:
     -h, --help       display this message
     -v, --version    display version information
+    -n, --dry-run    don't update ELISP-FILE, just display the ORG-FILE export result
+    -q, --silent     don't display the ORG-FILE export result
 
 Options:
     -s, --section [commentary]    specify which comment section to update
@@ -65,12 +67,14 @@ Options:
 Result is a property list
     (:org ORG-FILE
      :elisp ELISP-FILE
-     :section SECTION)."
+     :section SECTION
+     :silent SILENT-P
+     :dry-run DRY-RUN-P)."
   (setf args (-remove-item "--" args))
   (when (null args)
     (signal 'org-doc::usage nil))
   (let ((positional-args-left 2)
-        org elisp section)
+        org elisp section silent dry-run)
     (while args
       (let ((argi (pop args))
             value)
@@ -84,6 +88,10 @@ Result is a property list
                (signal 'org-doc::usage nil))
               ((member argi '("-v" "--version"))
                (signal 'org-doc::version nil))
+              ((member argi '("-n" "--dry-run"))
+               (setf dry-run t))
+              ((member argi '("-q" "--silent"))
+               (setf silent t))
               ((member argi '("-s" "--section"))
                (when section
                  (signal 'org-doc::duplicate-argument
@@ -118,7 +126,9 @@ Result is a property list
                         "`ELISP-FILE"))))
     (list :org org
           :elisp elisp
-          :section (or section "commentary"))))
+          :section (or section "commentary")
+          :dry-run dry-run
+          :silent silent)))
 
 (defun org-doc::usage (&optional exit-code)
   "Display `org-doc' usage information and exit.
@@ -132,10 +142,14 @@ EXIT-CODE is an integer used as the exit status (defaults to 0)."
   (unwind-protect
       (condition-case error
           (let* ((args (org-doc::parse-args argv))
-                 (export-result (org-doc:update-file-header (plist-get args :section)
-                                                            (plist-get args :org)
-                                                            (plist-get args :elisp))))
-            (message "%s" export-result))
+                 (export-result
+                  (if (plist-get args :dry-run)
+                      (org-doc:export-file-as-string (plist-get args :org))
+                    (org-doc:update-file-header (plist-get args :section)
+                                                (plist-get args :org)
+                                                (plist-get args :elisp)))))
+            (unless (plist-get args :silent)
+              (message "%s" export-result)))
         (org-doc::cli-argument-error
          (message "cli-error: %s." (cdr error))
          (org-doc::usage 1))
