@@ -155,7 +155,7 @@ Function returns the converted content of the ORG file."
   (let* ((export-result
           (with-temp-buffer
             (insert-file-contents (expand-file-name org))
-            (org-doc::export-buffer-as-string)))
+            (org-doc:export-buffer-as-string)))
 
          ;; the buffer associated with the `elisp' file;
          ;; nil if no buffers visit that file:

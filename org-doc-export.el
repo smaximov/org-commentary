@@ -77,7 +77,7 @@ On later versions the return value is always nil"
   (when (version< org-version "8.3")
     (append org-drawers (org-doc::parse-custom-drawers))))
 
-(defun org-doc::export-buffer-as-string ()
+(defun org-doc:export-buffer-as-string ()
   "Export the Org document opened in the current buffer as a string.
 
 The result is stripped from leading and trailing whitespace."
