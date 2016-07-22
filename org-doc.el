@@ -47,8 +47,8 @@
 ;; 1.1 Getting started
 ;; ───────────────────
 
-;;   /Note/: these steps are written in assumption you're using [Cask] for
-;;   project management.
+;;   /Note/: these steps are written with assumption you're using [Cask]
+;;   for project management.
 
 ;;   1. [Optional] If you have installed `org-doc' manually (the only
 ;;      option at the moment), create a link to `org-doc':
