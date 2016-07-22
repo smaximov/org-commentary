@@ -29,11 +29,8 @@
 ;; ─────────────────
 
 ;; 1 org-doc
-;; .. 1.1 Installation
-;; .. 1.2 Usage
-;; ..... 1.2.1 Inside Emacs
-;; ..... 1.2.2 From the command line
-;; .. 1.3 Similar projects
+;; .. 1.1 Getting started
+;; .. 1.2 Similar projects
 
 
 ;; 1 org-doc
@@ -47,18 +44,20 @@
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.1 Installation
-;; ────────────────
+;; 1.1 Getting started
+;; ───────────────────
 
-;;   FIXME: to be written.
+;;   /Note/: these steps are written in assumption you're using [Cask] for
+;;   project management.
 
+;;   1. [Optional] If you have installed `org-doc' manually (the only
+;;      option at the moment), create a link to `org-doc':
 
-;; 1.2 Usage
-;; ─────────
+;;      ┌────
+;;      │ $ cask link org-doc path/to/org-doc/installation
+;;      └────
 
-;;   tl;dr (assuming you're using [Cask] for project management)
-
-;;   1. Add `org-doc' to the development dependencies of your library:
+;;   2. Add `org-doc' to the development dependencies of your library:
 
 ;;      ┌────
 ;;      │ (development
@@ -71,23 +70,23 @@
 ;;      │ $ cask install
 ;;      └────
 
-;;   2. Put the [library header] boilerplate in your ELisp file.
+;;   3. Put the [library header] boilerplate in your ELisp file.
 
-;;   3. Generate /Commentary/ section of the library headers:
+;;   4. Generate /Commentary/ section of the library headers:
 
 ;;      ┌────
 ;;      │ $ cask emacs --batch -l org-doc-cli -f org-doc -- \
 ;;      │     README.org your-package.el
 ;;      └────
 
-;;   4. [Optional] Generate /Change Log/ section of the library headers:
+;;   5. [Optional] Generate /Change Log/ section of the library headers:
 
 ;;      ┌────
 ;;      │ $ cask emacs --batch -l org-doc-cli -f org-doc -- \
 ;;      │     --section changelog CHANGELOG.org your-package.el
 ;;      └────
 
-;;   5. Commit.
+;;   6. Commit.
 
 ;;   Run `cask emacs --batch -l org-doc-cli -f org-doc -- --help' to see
 ;;   available options.
@@ -99,25 +98,7 @@
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.2.1 Inside Emacs
-;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-
-;;   First you need to load `org-doc':
-
-;;   ┌────
-;;   │ (require 'org-doc)
-;;   └────
-
-;;   Then you can interactively call `org-doc:update-file-header'.
-
-
-;; 1.2.2 From the command line
-;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-
-;;   FIXME: to be written.
-
-
-;; 1.3 Similar projects
+;; 1.2 Similar projects
 ;; ────────────────────
 
 ;;   • [org2elcomment] (available on MELPA).

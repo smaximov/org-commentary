@@ -10,26 +10,29 @@
 
 =org-doc= — generate conventional [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][library headers]] from Org mode files.
 
-** Installation
+** Getting started
 
-FIXME: to be written.
+/Note/: these steps are written in assumption you're using [[https://github.com/cask/cask][Cask]] for project management.
 
-** Usage
+0. [Optional] If you have installed =org-doc= manually (the only option at the moment), create a
+   link to =org-doc=:
 
-tl;dr (assuming you're using [[https://github.com/cask/cask][Cask]] for project management)
+   #+begin_src bash
+     $ cask link org-doc path/to/org-doc/installation
+#+end_src
 
 1. Add =org-doc= to the development dependencies of your library:
 
    #+begin_src lisp
      (development
       (depends-on "org-doc"))
-   #+end_src
+#+end_src
 
    Fetch dependencies:
 
    #+begin_src bash
      $ cask install
-   #+end_src
+#+end_src
 
 2. Put the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][library header]] boilerplate in your ELisp file.
 
@@ -38,33 +41,19 @@ tl;dr (assuming you're using [[https://github.com/cask/cask][Cask]] for project 
    #+begin_src bash
      $ cask emacs --batch -l org-doc-cli -f org-doc -- \
          README.org your-package.el
-   #+end_src
+#+end_src
 
 4. [Optional] Generate /Change Log/ section of the library headers:
 
    #+begin_src bash
      $ cask emacs --batch -l org-doc-cli -f org-doc -- \
          --section changelog CHANGELOG.org your-package.el
-   #+end_src
+#+end_src
 
 5. Commit.
 
 Run ~cask emacs --batch -l org-doc-cli -f org-doc -- --help~ to see
 available options.
-
-*** Inside Emacs
-
-First you need to load =org-doc=:
-
-#+begin_src elisp
-  (require 'org-doc)
-#+end_src
-
-Then you can interactively call =org-doc:update-file-header=.
-
-*** From the command line
-
-FIXME: to be written.
 
 ** Contributing                                                    :noexport:
 
