@@ -89,6 +89,9 @@
 
 ;;   5. Commit.
 
+;;   Run `cask emacs --batch -l org-doc-cli -f org-doc -- --help' to see
+;;   available options.
+
 
 ;;   [Cask] https://github.com/cask/cask
 

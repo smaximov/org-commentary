@@ -49,6 +49,9 @@ tl;dr (assuming you're using [[https://github.com/cask/cask][Cask]] for project 
 
 5. Commit.
 
+Run ~cask emacs --batch -l org-doc-cli -f org-doc -- --help~ to see
+available options.
+
 *** Inside Emacs
 
 First you need to load =org-doc=:
