@@ -153,9 +153,7 @@ Function returns the converted content of the ORG file."
     (error "Invalid section name: `%s'" section-name))
 
   (let* ((export-result
-          (with-temp-buffer
-            (insert-file-contents (expand-file-name org))
-            (org-doc:export-buffer-as-string)))
+          (org-doc:export-file-as-string org))
 
          ;; the buffer associated with the `elisp' file;
          ;; nil if no buffers visit that file:

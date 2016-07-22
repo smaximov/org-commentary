@@ -85,5 +85,13 @@ The result is stripped from leading and trailing whitespace."
     (string-trim (org-export-as 'org-doc::ascii nil nil nil
                                 (org-doc:custom-options-plist)))))
 
+(defun org-doc:export-file-as-string (file)
+  "Export the Org file FILE as a string.
+
+The result is stripped from leading and trailing whitespace."
+  (with-temp-buffer
+    (insert-file-contents (expand-file-name file))
+    (org-doc:export-buffer-as-string)))
+
 (provide 'org-doc-export)
 ;;; org-doc-export.el ends here
