@@ -56,6 +56,46 @@
 ;; 1.2 Usage
 ;; ─────────
 
+;;   tl;dr (assuming you're using [Cask] for project management)
+
+;;   1. Add `org-doc' to the development dependencies of your library:
+
+;;      ┌────
+;;      │ (development
+;;      │  (depends-on "org-doc"))
+;;      └────
+
+;;      Fetch dependencies:
+
+;;      ┌────
+;;      │ $ cask install
+;;      └────
+
+;;   2. Put the [library header] boilerplate in your ELisp file.
+
+;;   3. Generate /Commentary/ section of the library headers:
+
+;;      ┌────
+;;      │ $ cask emacs --batch -l org-doc-cli -f org-doc -- \
+;;      │     README.org your-package.el
+;;      └────
+
+;;   4. [Optional] Generate /Change Log/ section of the library headers:
+
+;;      ┌────
+;;      │ $ cask emacs --batch -l org-doc-cli -f org-doc -- \
+;;      │     --section changelog CHANGELOG.org your-package.el
+;;      └────
+
+;;   5. Commit.
+
+
+;;   [Cask] https://github.com/cask/cask
+
+;;   [library header]
+;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
+
+
 ;; 1.2.1 Inside Emacs
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 

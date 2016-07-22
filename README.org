@@ -16,6 +16,39 @@ FIXME: to be written.
 
 ** Usage
 
+tl;dr (assuming you're using [[https://github.com/cask/cask][Cask]] for project management)
+
+1. Add =org-doc= to the development dependencies of your library:
+
+   #+begin_src lisp
+     (development
+      (depends-on "org-doc"))
+   #+end_src
+
+   Fetch dependencies:
+
+   #+begin_src bash
+     $ cask install
+   #+end_src
+
+2. Put the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][library header]] boilerplate in your ELisp file.
+
+3. Generate /Commentary/ section of the library headers:
+
+   #+begin_src bash
+     $ cask emacs --batch -l org-doc-cli -f org-doc -- \
+         README.org your-package.el
+   #+end_src
+
+4. [Optional] Generate /Change Log/ section of the library headers:
+
+   #+begin_src bash
+     $ cask emacs --batch -l org-doc-cli -f org-doc -- \
+         --section changelog CHANGELOG.org your-package.el
+   #+end_src
+
+5. Commit.
+
 *** Inside Emacs
 
 First you need to load =org-doc=:
