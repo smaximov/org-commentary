@@ -26,6 +26,7 @@
 (when (require 'undercover nil t)
   (undercover "*.el"))
 (require 'org-doc)
+(require 'org-doc-cli)
 
 (provide 'setup-tests)
 ;;; setup-tests.el ends here
