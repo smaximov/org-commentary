@@ -8,7 +8,7 @@
 [[https://coveralls.io/github/smaximov/org-doc?branch=master][https://coveralls.io/repos/github/smaximov/org-doc/badge.svg?branch=master]]
 :END:
 
-=org-doc= — convert Org mode content to elisp comment header.
+=org-doc= — generate conventional [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][library headers]] from Org mode files.
 
 ** Installation
 
@@ -50,7 +50,7 @@ Install dependencies:
   $ make dep-update
 #+end_src
 
-*** Preparing pull request
+*** Preparing a pull request
 
 Make sure all tests pass:
 

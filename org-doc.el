@@ -39,7 +39,12 @@
 ;; 1 org-doc
 ;; ═════════
 
-;;   `org-doc' — convert Org mode content to elisp comment header.
+;;   `org-doc' — generate conventional [library headers] from Org mode
+;;   files.
+
+
+;;   [library headers]
+;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
 ;; 1.1 Installation
