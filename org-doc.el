@@ -127,7 +127,6 @@
 
 ;;; Code:
 
-(require 'org-doc-custom)
 (require 'org-doc-export)
 (require 'org-doc-headers)
 (require 'org-doc-util)

@@ -42,7 +42,6 @@
 
 (require 'ox)
 
-(require 'org-doc-custom)
 (require 'org-doc-util)
 
 (defun org-doc::template (contents info)
@@ -83,7 +82,7 @@ On later versions the return value is always nil"
 The result is stripped from leading and trailing whitespace."
   (let ((org-drawers (org-doc::buffer-drawers)))
     (string-trim (org-export-as 'org-doc::ascii nil nil nil
-                                (org-doc:custom-options-plist)))))
+                                '(:ascii-charset utf-8)))))
 
 (defun org-doc:export-file-as-string (file)
   "Export the Org file FILE as a string.
