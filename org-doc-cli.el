@@ -66,6 +66,7 @@ Result is a property list
     (:org ORG-FILE
      :elisp ELISP-FILE
      :section SECTION)."
+  (setf args (-remove-item "--" args))
   (when (null args)
     (signal 'org-doc::usage nil))
   (let ((positional-args-left 2)
@@ -95,7 +96,6 @@ Result is a property list
                          (format "invalid value for option `--section': expected one of %s; `%s' given"
                                  org-doc::section-names value)))
                (setf section value))
-              ((string-equal argi "--"))
               ((string-prefix-p "-" argi)
                (signal 'org-doc::unknown-argument
                        (format "unknown option or flag: `%s'" argi)))

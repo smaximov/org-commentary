@@ -35,9 +35,10 @@
         (--each flags
           (expect (lambda () (org-doc::parse-args `(,it)))
                   :to-throw signal)))))
-  (it "should assume `--help' flag if no arguments are provided"
-    (expect (lambda () (org-doc::parse-args nil))
-            :to-throw 'org-doc::usage))
+  (it "should assume `--help' flag if no arguments are provided (sans `--')"
+    (--each '(() ("--") ("--" "--"))
+     (expect (lambda () (org-doc::parse-args it))
+             :to-throw 'org-doc::usage)))
 
   (it "should assume `--section' is `commentary' by default"
     (expect (plist-get (org-doc::parse-args '("readme.org" "file.el"))
