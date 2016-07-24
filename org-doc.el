@@ -337,6 +337,13 @@
 
 ;;   [make-readme-markdown] https://github.com/mgalgs/make-readme-markdown
 
+;;; Change Log:
+
+;; v0.2.1
+;; ══════
+
+;;   • initial release.
+
 ;;; Code:
 
 (require 'org-doc-export)
