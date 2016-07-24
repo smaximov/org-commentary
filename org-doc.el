@@ -7,6 +7,7 @@
 ;; Version: 0.2.1
 ;; Package-Requires: ((dash "2.0") (emacs "24.4") (org "8.0"))
 ;; Keywords: convenience, docs, tools
+;; URL: https://github.com/smaximov/org-doc
 
 ;; This file is not part of GNU Emacs.
 
