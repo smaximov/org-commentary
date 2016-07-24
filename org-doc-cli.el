@@ -79,7 +79,7 @@ where
 Update comment headers of elisp files using Org mode documents.
 
 Usage:
-    cask emacs --batch -l org-doc-cli -f org-doc -- [OPTION]... ORG-FILE ELISP-FILE
+    cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
 
 Flags:
     -h, --help       display this message

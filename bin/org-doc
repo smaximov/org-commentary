@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec cask emacs --batch -l org-doc-cli -f org-doc -- "$0"

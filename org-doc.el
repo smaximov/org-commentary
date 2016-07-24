@@ -75,21 +75,18 @@
 ;;   4. Generate /Commentary/ section of the library headers:
 
 ;;      ┌────
-;;      │ $ cask emacs --batch -l org-doc-cli -f org-doc -- \
-;;      │     README.org your-package.el
+;;      │ $ cask exec org-doc README.org your-package.el
 ;;      └────
 
 ;;   5. [Optional] Generate /Change Log/ section of the library headers:
 
 ;;      ┌────
-;;      │ $ cask emacs --batch -l org-doc-cli -f org-doc -- \
-;;      │     --section changelog CHANGELOG.org your-package.el
+;;      │ $ cask exec org-doc --section changelog CHANGELOG.org your-package.el
 ;;      └────
 
 ;;   6. Commit.
 
-;;   Run `cask emacs --batch -l org-doc-cli -f org-doc -- --help' to see
-;;   available options.
+;;   Run `cask exec org-doc --help' to see available options.
 
 
 ;;   [Cask] https://github.com/cask/cask

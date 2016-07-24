@@ -39,21 +39,18 @@
 3. Generate /Commentary/ section of the library headers:
 
    #+begin_src bash
-     $ cask emacs --batch -l org-doc-cli -f org-doc -- \
-         README.org your-package.el
+     $ cask exec org-doc README.org your-package.el
    #+end_src
 
 4. [Optional] Generate /Change Log/ section of the library headers:
 
    #+begin_src bash
-     $ cask emacs --batch -l org-doc-cli -f org-doc -- \
-         --section changelog CHANGELOG.org your-package.el
+     $ cask exec org-doc --section changelog CHANGELOG.org your-package.el
    #+end_src
 
 5. Commit.
 
-Run ~cask emacs --batch -l org-doc-cli -f org-doc -- --help~ to see
-available options.
+Run ~cask exec org-doc --help~ to see available options.
 
 ** Contributing                                                    :noexport:
 
