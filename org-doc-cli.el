@@ -35,7 +35,10 @@
     (("-v" "--version") nil nil nil nil org-doc::version)
     (("-n" "--dry-run") nil :dry-run)
     (("-q" "--silent") nil :silent)
-    (("-s" "--section") "commentary" :section t ,org-doc::section-names))
+    (("-s" "--section") "commentary" :section t ,org-doc::section-names)
+    (("-c" "--charset") ascii :ascii-charset t (("ascii" . ascii)
+                                                ("utf-8" . utf-8)
+                                                ("latin1" . latin1))))
   "Specification of command line arguments.
 
 Each element has the form
@@ -86,7 +89,10 @@ Flags:
 
 Options:
     -s, --section [commentary]    specify which comment section to update
-                                  [values: commentary, changelog, history]"
+                                  [values: commentary, changelog, history]
+    -c, --charset [ascii]         the charset allowed to represent various
+                                  elements and objects during export
+                                  [values: ascii, utf-8, latin1]"
           org-doc:version))
 
 (define-error 'org-doc::cli-argument-error

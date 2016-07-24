@@ -83,25 +83,6 @@
         (--each flags
           (expect (lambda () (org-doc::parse-args `(,it)))
                   :to-throw signal)))))
-  (it "should assume `--help' flag if no arguments are provided (sans `--')"
-    (--each '(() ("--") ("--" "--"))
-     (expect (lambda () (org-doc::parse-args it))
-             :to-throw 'org-doc::usage)))
-
-  (it "should assume `--section' is `commentary' by default"
-    (expect (plist-get (org-doc::parse-args '("readme.org" "file.el"))
-                       :section)
-            :to-equal "commentary"))
-
-  (it "should fail if `--section' is provided with invalid value"
-    (--each '(("-s" "code") ("--section" "code") ("--section=code"))
-      (expect (lambda () (org-doc::parse-args `("readme.org" "file.el" ,@it)))
-              :to-throw 'org-doc::invalid-option-value)))
-
-  (it "should support separating long options from values using both space and `='"
-    (--each '(("--section" "history") ("--section=history"))
-      (expect (plist-get (org-doc::parse-args `("readme.org" "file.el" ,@it)) :section)
-              :to-equal "history")))
 
   (it "should fail when an option is defined multiple times"
     (expect (lambda () (org-doc::parse-args '("-s" "commentary" "readme.org"
@@ -122,7 +103,43 @@
     (--each '(("--section" "history" "readme.org")
               ("readme.org" "file.el" "extra-argument"))
       (expect (lambda () (org-doc::parse-args it))
-              :to-throw 'org-doc::positional-arg-count-mismatch))))
+              :to-throw 'org-doc::positional-arg-count-mismatch)))
+
+  (it "should support separating long options from values using both space and `='"
+    (--each '(("--section" "history") ("--section=history"))
+      (expect (plist-get (org-doc::parse-args `("readme.org" "file.el" ,@it)) :section)
+              :to-equal "history")))
+
+  (describe "Defaults"
+    (it "should assume `--help' flag if no arguments are provided (sans `--')"
+      (--each '(() ("--") ("--" "--"))
+        (expect (lambda () (org-doc::parse-args it))
+                :to-throw 'org-doc::usage)))
+
+    (it "should assume `--section' is \"commentary\" by default"
+      (expect (plist-get (org-doc::parse-args '("readme.org" "file.el"))
+                         :section)
+              :to-equal "commentary"))
+
+    (it "should assume `--charset' is `ascii' by default"
+      (expect (plist-get (org-doc::parse-args '("readme.org" "file.el")) :ascii-charset)
+              :to-be 'ascii))
+
+    (it "should transform valid `--charset' values to the corresponding symbols"
+      (expect (plist-get (org-doc::parse-args '("readme.org" "file.el" "--charset=utf-8"))
+                         :ascii-charset)
+              :to-be 'utf-8)))
+
+  (describe "Validation"
+    (it "should fail if `--section' is invalid with"
+      (--each '(("-s" "code") ("--section" "code") ("--section=code"))
+        (expect (lambda () (org-doc::parse-args `("readme.org" "file.el" ,@it)))
+                :to-throw 'org-doc::invalid-option-value)))
+
+    (it "should fail if `--charset' is invalid"
+      (--each '(("-c" "cp1251") ("--charset" "cp1251") ("--charset=cp1251"))
+        (expect (lambda () (org-doc::parse-args `("readme.org" "file.el" ,@it)))
+                :to-throw 'org-doc::invalid-option-value)))))
 
 (provide 'test-cli)
 ;;; test-cli.el ends here
