@@ -119,7 +119,7 @@ Make sure all tests pass:
   $ make test
 #+end_src
 
-Update package's commentary header if you have made changes to [[file:README.org][README.org]] (do not edit commentary by hand!):
+Update package's commentary header if you have made changes to [[file:README.org][README.org]] (do not edit it by hand!):
 
 #+begin_src bash
   $ make update-headers
@@ -133,9 +133,9 @@ Commit final changes and create a pull request, describing briefly what it does.
   section of an Emacs Lisp file using the contents of an Org file opened in
   the current buffer.
 - [[https://github.com/mgalgs/make-readme-markdown][make-readme-markdown]] - in contrast to =org-doc=, this package treats
-  an Emacs Lisp file as the canonical source of documentation used to generate
-  =README= in the Markdown format. Provides additional features like
-  auto-detected badges and API documentation of public functions.
+  an Emacs Lisp file as the canonical source of documentation. That file is
+  used to generate =README= in the Markdown format. The package provides
+  additional features like auto-detected badges and API documentation of public functions.
 
 ** License                                                         :noexport:
 
