@@ -90,7 +90,12 @@ Commit final changes and create a pull request, describing briefly what it does.
 
 ** Similar projects
 
-- [[https://github.com/cute-jumper/org2elcomment][org2elcomment]] (available on MELPA).
+- [[https://github.com/cute-jumper/org2elcomment][org2elcomment]] - provides an interactive function to update the commentary
+  section of an Emacs Lisp file using the contents of an Org file opened in
+  the current buffer.
+- [[https://github.com/mgalgs/make-readme-markdown][make-readme-markdown]] - in contrast to =org-doc=, this package treats
+  an Emacs Lisp file as the canonical source of documentation used to generate
+  =README= in the Markdown format.
 
 ** License                                                         :noexport:
 

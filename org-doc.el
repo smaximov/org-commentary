@@ -98,10 +98,17 @@
 ;; 1.2 Similar projects
 ;; ────────────────────
 
-;;   • [org2elcomment] (available on MELPA).
+;;   • [org2elcomment] - provides an interactive function to update the
+;;     commentary section of an Emacs Lisp file using the contents of an
+;;     Org file opened in the current buffer.
+;;   • [make-readme-markdown] - in contrast to `org-doc', this package
+;;     treats an Emacs Lisp file as the canonical source of documentation
+;;     used to generate `README' in the Markdown format.
 
 
 ;;   [org2elcomment] https://github.com/cute-jumper/org2elcomment
+
+;;   [make-readme-markdown] https://github.com/mgalgs/make-readme-markdown
 
 ;;; Code:
 
