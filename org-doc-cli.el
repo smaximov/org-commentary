@@ -109,23 +109,14 @@ Result is a property list
                        (format "unknown option or flag: `%s'" argi)))
 
               ;; treat rest values as positional arguments
-              ((<= positional-args-left 0)
-               (signal 'org-doc::positional-arg-count-mismatch
-                       "extra positional arguments"))
-              (t
-               (if (= positional-args-left 2)
-                   (setf org argi)
-                 (setf elisp argi))
-               (setf positional-args-left (1- positional-args-left))))))
-    (when (> positional-args-left 0)
+              (t (push argi positional)))))
+    (when (/= 2 (length positional))
       (signal 'org-doc::positional-arg-count-mismatch
-              (format "%s positional argument(s) missing (%s)"
-                      positional-args-left
-                      (if (= positional-args-left 2)
-                          "`ORG-FILE' and `ELISP-FILE'"
-                        "`ELISP-FILE"))))
-    (list :org org
-          :elisp elisp
+              (format "expected exactly 2 positional arguments; %s given"
+                      (length positional))))
+    (setf positional (reverse positional))
+    (list :org (nth 0 positional)
+          :elisp (nth 1 positional)
           :section (or section "commentary")
           :dry-run dry-run
           :silent silent)))
