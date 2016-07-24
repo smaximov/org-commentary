@@ -247,7 +247,7 @@ Clone the repository:
 Install dependencies:
 
 #+begin_src bash
-  $ make dep-update
+  $ make dep-install
 #+end_src
 
 *** Preparing a pull request
