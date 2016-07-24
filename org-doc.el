@@ -29,8 +29,9 @@
 ;; ─────────────────
 
 ;; 1 org-doc
-;; .. 1.1 Getting started
-;; .. 1.2 Similar projects
+;; .. 1.1 Why?
+;; .. 1.2 Getting started
+;; .. 1.3 Similar projects
 
 
 ;; 1 org-doc
@@ -44,7 +45,30 @@
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.1 Getting started
+;; 1.1 Why?
+;; ────────
+
+;;   If you have a README file with the description of your Emacs Lisp
+;;   package (which you definetely should have), you may as well want to
+;;   use that file as the canonical source of the documentation of the
+;;   package. However, there is another place which needs this
+;;   documentation: the commentary section in your main library file; you
+;;   can update it manually, but it's tedious and error prone (not to
+;;   mention it's a violation of the [DRY] principle).
+
+;;   Org mode has built-in export facilities which can be used to convert
+;;   Org documents into various formats, including a simple plain text
+;;   format (`ascii' backend).
+
+;;   This package employs these facilities to generate library headers from
+;;   Org files automatically; it may be used either from inside of Emacs or
+;;   from the command line.
+
+
+;;   [DRY] https://en.wikipedia.org/wiki/Don%2527t_repeat_yourself
+
+
+;; 1.2 Getting started
 ;; ───────────────────
 
 ;;   /Note/: these steps are written with assumption you're using [Cask]
@@ -95,7 +119,7 @@
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.2 Similar projects
+;; 1.3 Similar projects
 ;; ────────────────────
 
 ;;   • [org2elcomment] - provides an interactive function to update the

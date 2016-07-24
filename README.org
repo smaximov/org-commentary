@@ -8,7 +8,22 @@
 [[https://coveralls.io/github/smaximov/org-doc?branch=master][https://coveralls.io/repos/github/smaximov/org-doc/badge.svg?branch=master]]
 :END:
 
-=org-doc= — generate conventional [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][library headers]] from Org mode files.
+=org-doc= — generate or update conventional [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][library headers]] using Org mode files.
+
+** Why?
+
+If you have a README file with the description of your Emacs Lisp
+package (which you definetely should have), you may as well want to use that file
+as the canonical source of the documentation of the package. However, there is
+another place which needs this documentation: the commentary section in
+your main library file; you can update it manually, but it's tedious and error
+prone (not to mention it's a violation of the [[https://en.wikipedia.org/wiki/Don%2527t_repeat_yourself][DRY]] principle).
+
+Org mode has built-in export facilities which can be used to convert Org documents
+into various formats, including a simple plain text format (=ascii= backend).
+
+This package employs these facilities to generate library headers from Org files
+automatically; it may be used either from inside of Emacs or from the command line.
 
 ** Getting started
 
