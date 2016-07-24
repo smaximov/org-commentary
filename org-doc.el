@@ -58,9 +58,9 @@
 
 ;;   If you have a README file with the description of your Emacs Lisp
 ;;   package (which you definetely should have), you may as well want to
-;;   use that file as the canonical source of the documentation of the
+;;   use that file as the canonical source of the documentation for the
 ;;   package. However, there is another place which needs this
-;;   documentation: the commentary section in your main library file; you
+;;   documentation: the commentary section of your main library file; you
 ;;   can update it manually, but it's tedious and error prone (not to
 ;;   mention it's a violation of the [DRY] principle).
 
