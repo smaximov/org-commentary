@@ -36,8 +36,8 @@
 ;; 1 org-doc
 ;; ═════════
 
-;;   `org-doc' — generate conventional [library headers] from Org mode
-;;   files.
+;;   `org-doc' — generate or update conventional [library headers] using
+;;   Org mode files.
 
 
 ;;   [library headers]
