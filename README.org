@@ -17,7 +17,7 @@ package (which you definetely should have), you may as well want to use that fil
 as the canonical source of the documentation of the package. However, there is
 another place which needs this documentation: the commentary section in
 your main library file; you can update it manually, but it's tedious and error
-prone (not to mention it's a violation of the [[https://en.wikipedia.org/wiki/Don%2527t_repeat_yourself][DRY]] principle).
+prone (not to mention it's a violation of the [[https://en.wikipedia.org/wiki/Don't_repeat_yourself][DRY]] principle).
 
 Org mode has built-in export facilities which can be used to convert Org documents
 into various formats, including a simple plain text format (=ascii= backend).

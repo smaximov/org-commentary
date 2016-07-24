@@ -65,7 +65,7 @@
 ;;   from the command line.
 
 
-;;   [DRY] https://en.wikipedia.org/wiki/Don%2527t_repeat_yourself
+;;   [DRY] https://en.wikipedia.org/wiki/Don't_repeat_yourself
 
 
 ;; 1.2 Getting started
