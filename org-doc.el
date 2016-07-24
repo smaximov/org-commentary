@@ -383,7 +383,7 @@ Function returns the converted content of the ORG file."
         (with-current-buffer elisp-buffer
           (org-doc::update-comment-header (org-doc::section-symbol section-name)
                                           export-result)
-          (basic-save-buffer (called-interactively-p))
+          (basic-save-buffer)
           export-result)
 
       ;; kill the buffer associated with the `elisp' file
