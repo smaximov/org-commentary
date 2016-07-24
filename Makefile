@@ -15,6 +15,6 @@ test:
 
 update-headers:
 	cask emacs --batch -L . -l org-doc-cli -f org-doc -- \
-		README.org org-doc.el
+		README.org org-doc.el --charset utf-8
 
 .PHONY: help dep-install test update-headers
