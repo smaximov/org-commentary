@@ -67,7 +67,6 @@ where
     (-each org-doc::cli-args-spec
       (-lambda ((_ default key . _))
         (when (and default key)
-          (message "default %s key %S" default key)
           (setf defaults-plist
                 (plist-put defaults-plist key default)))))
     defaults-plist))
