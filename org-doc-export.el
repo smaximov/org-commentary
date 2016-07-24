@@ -81,8 +81,7 @@ On later versions the return value is always nil"
 
 The result is stripped from leading and trailing whitespace."
   (let ((org-drawers (org-doc::buffer-drawers)))
-    (string-trim (org-export-as 'org-doc::ascii nil nil nil
-                                '(:ascii-charset utf-8)))))
+    (string-trim (org-export-as 'org-doc::ascii nil nil nil))))
 
 (defun org-doc:export-file-as-string (file)
   "Export the Org file FILE as a string.

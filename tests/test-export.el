@@ -71,12 +71,12 @@ This subtree won't be exported!
           (expect export-result :to-match "Table of Contents")))
 
     (describe "Export mode"
-      (it "should export an Org document in the `utf8' mode by default"
+      (it "should export an Org document in the `ascii' mode by default"
         (with-temp-buffer
           (insert buffer-content)
           (setf export-result (org-doc:export-buffer-as-string))
           (expect export-result :to-match
-                  (rx-to-string `(char ,@ (cdr (assoc 'utf-8 org-ascii-underline)))))))
+                  (rx-to-string `(char ,@ (cdr (assoc 'ascii org-ascii-underline)))))))
 
       ;; FIXME: customize export charset
       (xit "should be possible to change the export mode using `org-ascii-charset'"
