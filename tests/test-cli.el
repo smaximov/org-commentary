@@ -27,6 +27,38 @@
 
 (require 'dash)
 
+(describe "Validate command line arguments"
+  (it "should validate using a list of valid values"
+    (expect (org-doc::validate "present" '("present" "value"))
+            :to-equal "present")
+
+    (expect (org-doc::validate "absent" '("present" "value"))
+            :to-be nil))
+
+  (it "should validate and transform using a validation function"
+    (expect (org-doc::validate "value" (lambda (value)
+                                         (when (string-equal value "value")
+                                           "transformed value")))
+            :to-equal "transformed value")
+
+    (expect (org-doc::validate "absent" (lambda (value)
+                                          (when (string-equal value "value")
+                                            "transformed value")))
+            :to-be nil))
+
+  (it "should validate and transform using an association list"
+    (expect (org-doc::validate "present" '(("present" . present)
+                                           ("value" . value)))
+            :to-be 'present)
+
+    (expect (org-doc::validate "absent" '(("present" . present)
+                                          ("value" . value)))
+            :to-be nil))
+
+  (it "should raise an error if a validator is not a function or a list"
+    (expect (lambda () (org-doc::validate "value" 'not-a-list))
+            :to-throw 'error)))
+
 (describe "Parse command line arguments"
   (it "should exit immediately if `--help' or `--version' are provided"
     (-each '((("-h" "--help") . org-doc::usage)
