@@ -65,6 +65,30 @@ automatically; it may be used either from inside of Emacs or from the command li
 
 5. Commit.
 
+** API
+
+Use ~M-x describe-function <NAME>~ for details.
+
+- *command* ~org-doc:update~
+
+  Update library headers using the content of an Org document.
+
+- *function* ~org-doc:export-buffer-as-string~.
+
+  Export the Org document opened in the current buffer as a string.
+
+- *function* ~org-doc:export-file-as-string~.
+
+  Export an Org document as a string.
+
+*** Command line interface
+
+=org-doc= provides an executable script which can be invoked like this:
+
+#+begin_src bash
+  $ cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
+#+end_src
+
 Run ~cask exec org-doc --help~ to see available options.
 
 ** Contributing                                                    :noexport:

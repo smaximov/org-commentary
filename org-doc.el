@@ -31,7 +31,9 @@
 ;; 1 org-doc
 ;; .. 1.1 Why?
 ;; .. 1.2 Getting started
-;; .. 1.3 Similar projects
+;; .. 1.3 API
+;; ..... 1.3.1 Command line interface
+;; .. 1.4 Similar projects
 
 
 ;; 1 org-doc
@@ -110,8 +112,6 @@
 
 ;;   6. Commit.
 
-;;   Run `cask exec org-doc --help' to see available options.
-
 
 ;;   [Cask] https://github.com/cask/cask
 
@@ -119,7 +119,38 @@
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.3 Similar projects
+;; 1.3 API
+;; ───────
+
+;;   Use `M-x describe-function <NAME>' for details.
+
+;;   • *command* `org-doc:update'
+
+;;     Update library headers using the content of an Org document.
+
+;;   • *function* `org-doc:export-buffer-as-string'.
+
+;;     Export the Org document opened in the current buffer as a string.
+
+;;   • *function* `org-doc:export-file-as-string'.
+
+;;     Export an Org document as a string.
+
+
+;; 1.3.1 Command line interface
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   `org-doc' provides an executable script which can be invoked like
+;;   this:
+
+;;   ┌────
+;;   │ $ cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
+;;   └────
+
+;;   Run `cask exec org-doc --help' to see available options.
+
+
+;; 1.4 Similar projects
 ;; ────────────────────
 
 ;;   • [org2elcomment] - provides an interactive function to update the
