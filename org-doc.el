@@ -1,4 +1,4 @@
-;;; org-doc.el --- convert Org mode content to elisp comment header -*- lexical-binding: t; -*-
+;;; org-doc.el --- generate or update conventional library headers using Org mode files -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016 Sergei Maximov
 
