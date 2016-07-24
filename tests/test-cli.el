@@ -36,27 +36,43 @@
             :to-be nil))
 
   (it "should validate and transform using a validation function"
-    (expect (org-doc::validate "value" (lambda (value)
-                                         (when (string-equal value "value")
-                                           "transformed value")))
-            :to-equal "transformed value")
+    (let ((validator (lambda (value)
+                       (when (string-equal value "value")
+                         "transformed value"))))
+      (expect (org-doc::validate "value" validator)
+              :to-equal "transformed value")
 
-    (expect (org-doc::validate "absent" (lambda (value)
-                                          (when (string-equal value "value")
-                                            "transformed value")))
-            :to-be nil))
+      (expect (org-doc::validate "absent" validator)
+             :to-be nil)))
 
   (it "should validate and transform using an association list"
-    (expect (org-doc::validate "present" '(("present" . present)
-                                           ("value" . value)))
-            :to-be 'present)
+    (let ((validator '(("present" . present)
+                       ("value" . value))))
+      (expect (org-doc::validate "present" validator)
+              :to-be 'present)
 
-    (expect (org-doc::validate "absent" '(("present" . present)
-                                          ("value" . value)))
-            :to-be nil))
+      (expect (org-doc::validate "absent" validator)
+              :to-be nil)))
 
   (it "should raise an error if a validator is not a function or a list"
-    (expect (lambda () (org-doc::validate "value" 'not-a-list))
+    (expect (lambda () (org-doc::validate "value" 'not-a-list-or-a-function))
+            :to-throw 'error)))
+
+(describe "Handle values"
+  (it "should invoke a function handler"
+    (expect (org-doc::handle (lambda (value) (1+ value)) 0 nil)
+            :to-equal 1))
+
+  (it "should fire a signal handler"
+    (expect (lambda () (org-doc::handle 'org-doc::version nil nil))
+            :to-throw 'org-doc::version))
+
+  (it "should fire a signal when provided with an arbitrary symbol"
+    (expect (lambda () (org-doc::handle 'arbitrary-symbol nil nil))
+            :not :to-throw 'arbitrary-symbol))
+
+  (it "should throw an error when provided with an invalid handler"
+    (expect (lambda () (org-doc::handle 'arbitrary-symbol nil nil))
             :to-throw 'error)))
 
 (describe "Parse command line arguments"
