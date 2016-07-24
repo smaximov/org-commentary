@@ -103,7 +103,9 @@
 ;;     Org file opened in the current buffer.
 ;;   • [make-readme-markdown] - in contrast to `org-doc', this package
 ;;     treats an Emacs Lisp file as the canonical source of documentation
-;;     used to generate `README' in the Markdown format.
+;;     used to generate `README' in the Markdown format. Provides
+;;     additional features like auto-detected badges and API documentation
+;;     of public functions.
 
 
 ;;   [org2elcomment] https://github.com/cute-jumper/org2elcomment

@@ -95,7 +95,8 @@ Commit final changes and create a pull request, describing briefly what it does.
   the current buffer.
 - [[https://github.com/mgalgs/make-readme-markdown][make-readme-markdown]] - in contrast to =org-doc=, this package treats
   an Emacs Lisp file as the canonical source of documentation used to generate
-  =README= in the Markdown format.
+  =README= in the Markdown format. Provides additional features like
+  auto-detected badges and API documentation of public functions.
 
 ** License                                                         :noexport:
 
