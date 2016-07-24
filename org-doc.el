@@ -33,7 +33,13 @@
 ;; .. 1.2 Getting started
 ;; .. 1.3 API
 ;; ..... 1.3.1 Command line interface
-;; .. 1.4 Similar projects
+;; .. 1.4 Customization
+;; ..... 1.4.1 Inclusion of the table of contents (TOC)
+;; ..... 1.4.2 Inclusion of subtrees
+;; ..... 1.4.3 Inclusion of drawers
+;; ..... 1.4.4 Inclusion of tags
+;; ..... 1.4.5 Export charset
+;; .. 1.5 Similar projects
 
 
 ;; 1 org-doc
@@ -150,7 +156,170 @@
 ;;   Run `cask exec org-doc --help' to see available options.
 
 
-;; 1.4 Similar projects
+;; 1.4 Customization
+;; ─────────────────
+
+;;   The user can set a number of options which affect the exporting
+;;   process.
+
+;;   Each option can be set in several ways:
+
+;;   • *in-file keyword*
+
+;;     A line which starts with a `#+' followed by a keyword, a colon and
+;;     then individual words defining a setting. Example:
+
+;;     ┌────
+;;     │ #+TITLE: the title of the document
+;;     └────
+
+;;   • *in-file option*
+
+;;     An option in compact form using the `#+OPTIONS' keyword. In-file
+;;     options are specified in the following form:
+
+;;     ┌────
+;;     │ #+OPTIONS: opt1 opt2 opt3 ... optN
+;;     └────
+
+;;     `opt' consists of a short key followed by a value. For example,
+;;     option `toc:' toggles inclusion of the table of contents; the
+;;     following setting excludes the table of contens from export:
+
+;;     ┌────
+;;     │ #+OPTIONS: toc:nil
+;;     └────
+
+;;     Accepted values vary from option to option.
+
+;;     To specify a rather long list if such options, one can use several
+;;     `#+OPTIONS' lines.
+
+;;   • *property*
+
+;;     An option specified via the optional property list `EXT-PLIST'
+;;     passed as the last argument of the public functions (see the *API*
+;;     section). For example, to enable export using UTF-8 characters, pass
+;;     `(list :ascii-charset 'utf-8)' as the last argument of an export
+;;     function.
+
+;;   • *variable*
+
+;;     A global variable.
+
+;;   This package also enables setting the options via command line
+;;   arguments, which are mapped to the corresponding *properties*.
+
+;;   In-file settings take precedence over keyword parameters, which in
+;;   turn override global variables.
+
+;;   This section gives a brief descriptions of common options; for more
+;;   details, see the dedicated sections ([Export settings], [Publishing
+;;   options]) of the Org mode manual.
+
+
+;;   [Export settings] http://orgmode.org/manual/Export-settings.html
+
+;;   [Publishing options] http://orgmode.org/manual/Publishing-options.html
+
+
+;; 1.4.1 Inclusion of the table of contents (TOC)
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   The table of content is normally inserted before the first headline of
+;;   the file.
+
+;;   • *in-file option* `toc:'
+
+;;     If this options is a number, use this number as the depth of the
+;;     generated TOC.  Setting this option to `nil' disables default TOC.
+
+;;     Synonyms:
+
+;;     ⁃ *property* `:toc'
+;;     ⁃ *variable* `org-doc-with-toc'
+
+;;   • *in-file keyword* `#+TOC'
+
+;;     Insert TOC at the current position.
+
+;;   See [Table of contents] for more details.
+
+
+;;   [Table of contents] http://orgmode.org/manual/Table-of-contents.html
+
+
+;; 1.4.2 Inclusion of subtrees
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   • *in-file keyword* `#+EXCLUDE_TAGS'
+
+;;     The tags that exclude a tree from export (the default value is
+;;     `:noexport:').
+
+;;     Alternatives:
+
+;;     ⁃ *in-file option* `exclude-tags:'
+;;     ⁃ *property* `:exclude-tags'
+;;     ⁃ *variable* `org-export-exclude-tags'
+
+;;   • *in-file keyword* `#+INCLUDE_TAGS'
+
+;;     The tags that select a tree for export (the default value is
+;;     `:export:'). This setting takes precedence over `#+EXCLUDE_TAGS'.
+
+;;     Alternatives:
+
+;;     ⁃ *in-file option* `select-tags:'
+;;     ⁃ *property* `:select-tags'
+;;     ⁃ *variable* `org-export-select-tags'
+
+
+;; 1.4.3 Inclusion of drawers
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   /Note/: you need to specify custom drawers using the `#+DRAWERS'
+;;   keyword for Org mode versions prior to 8.3.
+
+;;   • *in-file optons* `d:'
+
+;;     A list of drawers to include. If the first element is the atom
+;;     `not', specify drawers to exclude instead.
+
+;;     Alternatives:
+
+;;     ⁃ *property* `:with-drawers'
+;;     ⁃ *variable* `org-export-with-drawers'
+
+
+;; 1.4.4 Inclusion of tags
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   • *in-file option* `tags:'
+
+;;     Toggles inclusion of tags.
+
+;;     Alternatives:
+
+;;     ⁃ *property* `:with-tags'
+;;     ⁃ *variable* `org-export-with-tags'
+
+
+;; 1.4.5 Export charset
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   • *property* `:ascii-charset'
+
+;;     The charset allowed to represent various elements and objects during
+;;     export (the default value is `ascii').
+
+;;     Alternatives:
+
+;;     ⁃ *variable* `org-ascii-charset',
+;;     ⁃ *command-line argument* `--charset' (`-c')
+
+
+;; 1.5 Similar projects
 ;; ────────────────────
 
 ;;   • [org2elcomment] - provides an interactive function to update the
