@@ -261,7 +261,7 @@ EXIT-CODE is an integer used as the exit status (defaults to 0)."
             (setf export-result
                   (if dry-run
                       (org-doc:export-file-as-string org args)
-                    (org-doc:update-library-headers section org elisp args)))
+                    (org-doc:update section org elisp args)))
 
             (unless silent
               (message "%s" export-result)))

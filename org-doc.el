@@ -144,10 +144,10 @@
 
 (defconst org-doc:version "0.1.0")
 
-(defun org-doc:update-library-headers (section-name org elisp &optional ext-plist)
+(defun org-doc:update (section-name org elisp &optional ext-plist)
   "Update library headers using the content of an Org document.
 
-SECTION-NAME is a string denoting which section of the header to update.
+SECTION-NAME is a string indicating which section of the header to update.
 Valid values are defined in `org-doc::section-names'.
 
 ORG is a name of Org document which contents will be exported.
