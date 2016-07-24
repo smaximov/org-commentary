@@ -110,7 +110,8 @@ Options:
 
 HANDLER is either a function or a name of a signal defined
 with `define-error'.  If HANDLER is none of the above, raise an error."
-  (cond ((get handler 'error-conditions)
+  (cond ((and (symbolp handler)
+              (get handler 'error-conditions))
          (signal handler datum))
         ((functionp handler)
          (apply handler value datum))
