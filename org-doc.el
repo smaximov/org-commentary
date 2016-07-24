@@ -4,7 +4,7 @@
 
 ;; Author: Sergei Maximov <s.b.maximov@gmail.com>
 ;; Created: 20 Jul 2016
-;; Version: 0.1.0
+;; Version: 0.2
 ;; Package-Requires: ((dash "2.0") (emacs "24.4") (org "8.0"))
 ;; Keywords: convenience, docs, tools
 
@@ -342,7 +342,7 @@
 (require 'org-doc-headers)
 (require 'org-doc-util)
 
-(defconst org-doc:version "0.1.0")
+(defconst org-doc:version "0.2")
 
 (defun org-doc:update (section-name org elisp &optional ext-plist)
   "Update library headers using the content of an Org document.
