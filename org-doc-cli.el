@@ -238,7 +238,7 @@ EXIT-CODE is an integer used as the exit status (defaults to 0)."
   (kill-emacs (or exit-code 0)))
 
 (defun org-doc ()
-  "Parse command line arguments and update elisp comment headers accordingly."
+  "Parse command line arguments and update elisp library headers accordingly."
   (unwind-protect
       (condition-case error
           (let* ((args (org-doc::parse-args argv))
@@ -261,7 +261,7 @@ EXIT-CODE is an integer used as the exit status (defaults to 0)."
             (setf export-result
                   (if dry-run
                       (org-doc:export-file-as-string org args)
-                    (org-doc:update-file-header section org elisp args)))
+                    (org-doc:update-library-headers section org elisp args)))
 
             (unless silent
               (message "%s" export-result)))

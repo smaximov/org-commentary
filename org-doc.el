@@ -144,8 +144,8 @@
 
 (defconst org-doc:version "0.1.0")
 
-(defun org-doc:update-file-header (section-name org elisp &optional ext-plist)
-  "Update the file header using the content of an Org document.
+(defun org-doc:update-library-headers (section-name org elisp &optional ext-plist)
+  "Update library headers using the content of an Org document.
 
 SECTION-NAME is a string denoting which section of the header to update.
 Valid values are defined in `org-doc::section-names'.
