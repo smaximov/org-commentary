@@ -76,20 +76,28 @@ On later versions the return value is always nil"
   (when (version< org-version "8.3")
     (append org-drawers (org-doc::parse-custom-drawers))))
 
-(defun org-doc:export-buffer-as-string ()
+(defun org-doc:export-buffer-as-string (&optional ext-plist)
   "Export the Org document opened in the current buffer as a string.
+
+Optional argument EXT-PLIST, when provided, is a property list
+with external parameters overriding Org default settings, but
+still inferior to file-local settings.
 
 The result is stripped from leading and trailing whitespace."
   (let ((org-drawers (org-doc::buffer-drawers)))
-    (string-trim (org-export-as 'org-doc::ascii nil nil nil))))
+    (string-trim (org-export-as 'org-doc::ascii nil nil nil ext-plist))))
 
-(defun org-doc:export-file-as-string (file)
+(defun org-doc:export-file-as-string (file &optional ext-plist)
   "Export the Org file FILE as a string.
+
+Optional argument EXT-PLIST, when provided, is a property list
+with external parameters overriding Org default settings, but
+still inferior to file-local settings.
 
 The result is stripped from leading and trailing whitespace."
   (with-temp-buffer
     (insert-file-contents (expand-file-name file))
-    (org-doc:export-buffer-as-string)))
+    (org-doc:export-buffer-as-string ext-plist)))
 
 (provide 'org-doc-export)
 ;;; org-doc-export.el ends here

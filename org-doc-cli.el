@@ -23,6 +23,7 @@
 
 ;;; Code:
 
+(require 'dash)
 (require 'org)
 (require 'subr-x)
 
@@ -236,14 +237,31 @@ EXIT-CODE is an integer used as the exit status (defaults to 0)."
   (unwind-protect
       (condition-case error
           (let* ((args (org-doc::parse-args argv))
-                 (export-result
-                  (if (plist-get args :dry-run)
-                      (org-doc:export-file-as-string (plist-get args :org))
-                    (org-doc:update-file-header (plist-get args :section)
-                                                (plist-get args :org)
-                                                (plist-get args :elisp)))))
-            (unless (plist-get args :silent)
+
+                 ;; custom options
+                 (org (plist-get args :org))
+                 (elisp (plist-get args :elisp))
+                 (section (plist-get args :section))
+                 (silent (plist-get args :silent))
+                 (dry-run (plist-get args :dry-run))
+
+                 ;; result
+                 export-result)
+
+            ;; remove custom options
+            (--each '(:org :elisp :section :dry-run :silent)
+              (setf args (plist-put args it nil)))
+
+            ;; generate result
+            (setf export-result
+                  (if dry-run
+                      (org-doc:export-file-as-string org args)
+                    (org-doc:update-file-header section org elisp args)))
+
+            (unless silent
               (message "%s" export-result)))
+
+        ;; handle errors
         (org-doc::cli-argument-error
          (message "cli-error: %s." (cdr error))
          (org-doc::usage 1))

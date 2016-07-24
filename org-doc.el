@@ -114,13 +114,19 @@
 
 (defconst org-doc:version "0.1.0")
 
-(defun org-doc:update-file-header (section-name org elisp)
+(defun org-doc:update-file-header (section-name org elisp &optional ext-plist)
   "Update the file header using the content of an Org document.
 
 SECTION-NAME is a string denoting which section of the header to update.
 Valid values are defined in `org-doc::section-names'.
+
 ORG is a name of Org document which contents will be exported.
+
 ELISP is a name of the Emacs Lisp file which comment header will be updated.
+
+Optional argument EXT-PLIST, when provided, is a property list
+with external parameters overriding Org default settings, but
+still inferior to file-local settings.
 
 Function returns the converted content of the ORG file."
   (interactive
@@ -133,7 +139,7 @@ Function returns the converted content of the ORG file."
     (error "Invalid section name: `%s'" section-name))
 
   (let* ((export-result
-          (org-doc:export-file-as-string org))
+          (org-doc:export-file-as-string org ext-plist))
 
          ;; the buffer associated with the `elisp' file;
          ;; nil if no buffers visit that file:

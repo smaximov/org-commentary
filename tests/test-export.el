@@ -78,14 +78,20 @@ This subtree won't be exported!
           (expect export-result :to-match
                   (rx-to-string `(char ,@ (cdr (assoc 'ascii org-ascii-underline)))))))
 
-      ;; FIXME: customize export charset
-      (xit "should be possible to change the export mode using `org-ascii-charset'"
-        (with-temp-buffer
-          (insert buffer-content)
-          (let ((org-doc:export-charset 'latin1))
-            (setf export-result (org-doc:export-buffer-as-string)))
-          (expect export-result :to-match
-                  (rx-to-string `(char ,@ (cdr (assoc 'latin1 org-ascii-underline))))))))
+      (it "should be possible to change the export mode using `org-ascii-charset' or `:ascii-charset'"
+        (--each '(latin1 ascii utf-8)
+          (with-temp-buffer
+            (insert buffer-content)
+            (setf export-result (org-doc:export-buffer-as-string `(:ascii-charset ,it)))
+            (expect export-result :to-match
+                    (rx-to-string `(char ,@(cdr (assoc it org-ascii-underline))))))
+
+          (with-temp-buffer
+            (insert buffer-content)
+            (let ((org-ascii-charset it))
+              (setf export-result (org-doc:export-buffer-as-string)))
+            (expect export-result :to-match
+                    (rx-to-string `(char ,@(cdr (assoc it org-ascii-underline)))))))))
 
     (describe "Excluding"
       (it "should exclude the content of specific drawers"
