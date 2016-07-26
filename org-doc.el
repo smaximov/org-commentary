@@ -391,7 +391,9 @@ Function returns the converted content of the ORG file."
           (org-doc::update-comment-header (org-doc::section-symbol section-name)
                                           export-result)
           (basic-save-buffer)
-          export-result)
+          (if (called-interactively-p 'any)
+              (message "org-doc: updated %S." elisp)
+            export-result))
 
       ;; kill the buffer associated with the `elisp' file
       ;; if we created it manually.
