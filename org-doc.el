@@ -338,6 +338,13 @@
 
 ;;; Change Log:
 
+;; current
+;; ═══════
+
+;;   • `org-doc:update' doesn't return the export result when called
+;;     interactively; a message is displayed instead.
+
+
 ;; v0.2.1
 ;; ══════
 
