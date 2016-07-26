@@ -176,8 +176,7 @@
 
 ;;   • *in-file option*
 
-;;     An option in compact form using the `#+OPTIONS' keyword. In-file
-;;     options are specified in the following form:
+;;     An option in compact form using the `#+OPTIONS' keyword:
 
 ;;     ┌────
 ;;     │ #+OPTIONS: opt1 opt2 opt3 ... optN
@@ -211,10 +210,10 @@
 ;;   This package also enables setting the options via command line
 ;;   arguments, which are mapped to the corresponding *properties*.
 
-;;   In-file settings take precedence over keyword parameters, which in
+;;   In-file settings take precedence over keyword properties, which in
 ;;   turn override global variables.
 
-;;   This section gives a brief descriptions of common options; for more
+;;   This section gives a brief description of common options; for more
 ;;   details, see the dedicated sections ([Export settings], [Publishing
 ;;   options]) of the Org mode manual.
 
