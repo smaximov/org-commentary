@@ -81,6 +81,10 @@ Update comment headers of elisp files using Org mode documents.
 Usage:
     cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
 
+Usage (without Cask):
+    emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- \\
+        [OPTION]... ORG-FILE ELISP-FILE
+
 Flags:
     -h, --help       display this message
     -v, --version    display version information
