@@ -27,10 +27,11 @@ automatically; it may be used either from inside of Emacs or from the command li
 
 ** Getting started
 
-/Note/: these steps are written with assumption you're using [[https://github.com/cask/cask][Cask]] for project management.
+/Note/: these steps are written with assumption you're using [[https://github.com/cask/cask][Cask]] for project management;
+otherwise, see "Not using Cask?" section below for instructions on how to use =org-doc=
+CLI without Cask.
 
-0. [Optional] If you have installed =org-doc= manually (the only option at the moment), create a
-   link to =org-doc=:
+0. [Optional] If you have installed =org-doc= manually, create a link to =org-doc=:
 
    #+begin_src bash
      $ cask link org-doc path/to/org-doc/installation
@@ -90,6 +91,22 @@ Use ~M-x describe-function <NAME>~ for details.
 #+end_src
 
 Run ~cask exec org-doc --help~ to see available options.
+
+**** Not using Cask?
+
+Provided =org-doc= is installed via the built-in package manager, you can
+invoke it from the shell like this:
+
+#+begin_src bash
+  $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- \
+      [OPTION]... ORG-FILE ELISP-FILE
+#+end_src
+
+For example, to see available options, run
+
+#+begin_src bash
+  $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- --help
+#+end_src
 
 ** Customization
 

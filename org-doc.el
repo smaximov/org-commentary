@@ -81,10 +81,11 @@
 ;; ───────────────────
 
 ;;   /Note/: these steps are written with assumption you're using [Cask]
-;;   for project management.
+;;   for project management; otherwise, see "Not using Cask?" section below
+;;   for instructions on how to use `org-doc' CLI without Cask.
 
-;;   1. [Optional] If you have installed `org-doc' manually (the only
-;;      option at the moment), create a link to `org-doc':
+;;   1. [Optional] If you have installed `org-doc' manually, create a link
+;;      to `org-doc':
 
 ;;      ┌────
 ;;      │ $ cask link org-doc path/to/org-doc/installation
@@ -155,6 +156,23 @@
 ;;   └────
 
 ;;   Run `cask exec org-doc --help' to see available options.
+
+
+;; ◊ 1.3.1.1 Not using Cask?
+
+;;   Provided `org-doc' is installed via the built-in package manager, you
+;;   can invoke it from the shell like this:
+
+;;   ┌────
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- \
+;;   │     [OPTION]... ORG-FILE ELISP-FILE
+;;   └────
+
+;;   For example, to see available options, run
+
+;;   ┌────
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- --help
+;;   └────
 
 
 ;; 1.4 Customization
