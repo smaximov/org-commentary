@@ -75,23 +75,7 @@ CLI without Cask.
 
 5. Commit.
 
-** API
-
-Use ~M-x describe-function <NAME>~ for details.
-
-- *command* ~org-doc-update~
-
-  Update library headers using the content of an Org document.
-
-- *function* ~org-doc-export-buffer-as-string~.
-
-  Export the Org document opened in the current buffer as a string.
-
-- *function* ~org-doc-export-file-as-string~.
-
-  Export an Org document as a string.
-
-*** Command line interface
+** Command line interface
 
 =org-doc= provides an executable script which can be invoked like this:
 
@@ -101,7 +85,7 @@ Use ~M-x describe-function <NAME>~ for details.
 
 Run ~cask exec org-doc --help~ to see available options.
 
-**** Not using Cask?
+*** Not using Cask?
 :PROPERTIES:
 :CUSTOM_ID: not-using-cask
 :END:
@@ -119,6 +103,22 @@ For example, to see available options, run
 #+begin_src bash
   $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- --help
 #+end_src
+
+** API
+
+Use ~M-x describe-function <NAME>~ for details.
+
+- *command* ~org-doc-update~
+
+  Update library headers using the content of an Org document.
+
+- *function* ~org-doc-export-buffer-as-string~.
+
+  Export the Org document opened in the current buffer as a string.
+
+- *function* ~org-doc-export-file-as-string~.
+
+  Export an Org document as a string.
 
 ** Customization
 

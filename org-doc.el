@@ -34,15 +34,16 @@
 ;; .. 1.2 Installation
 ;; ..... 1.2.1 MELPA
 ;; .. 1.3 Getting started
-;; .. 1.4 API
-;; ..... 1.4.1 Command line interface
-;; .. 1.5 Customization
-;; ..... 1.5.1 Inclusion of the table of contents (TOC)
-;; ..... 1.5.2 Inclusion of subtrees
-;; ..... 1.5.3 Inclusion of drawers
-;; ..... 1.5.4 Inclusion of tags
-;; ..... 1.5.5 Export charset
-;; .. 1.6 Similar projects
+;; .. 1.4 Command line interface
+;; ..... 1.4.1 Not using Cask?
+;; .. 1.5 API
+;; .. 1.6 Customization
+;; ..... 1.6.1 Inclusion of the table of contents (TOC)
+;; ..... 1.6.2 Inclusion of subtrees
+;; ..... 1.6.3 Inclusion of drawers
+;; ..... 1.6.4 Inclusion of tags
+;; ..... 1.6.5 Export charset
+;; .. 1.7 Similar projects
 
 
 ;; 1 org-doc
@@ -139,13 +140,44 @@
 ;;   6. Commit.
 
 
-;;   [Not using Cask?] See section 1.4.1.1
+;;   [Not using Cask?] See section 1.4.1
 
 ;;   [library header]
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.4 API
+;; 1.4 Command line interface
+;; ──────────────────────────
+
+;;   `org-doc' provides an executable script which can be invoked like
+;;   this:
+
+;;   ┌────
+;;   │ $ cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
+;;   └────
+
+;;   Run `cask exec org-doc --help' to see available options.
+
+
+;; 1.4.1 Not using Cask?
+;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+;;   Provided `org-doc' is installed via the built-in package manager, you
+;;   can invoke it from the shell like this:
+
+;;   ┌────
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- \
+;;   │     [OPTION]... ORG-FILE ELISP-FILE
+;;   └────
+
+;;   For example, to see available options, run
+
+;;   ┌────
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- --help
+;;   └────
+
+
+;; 1.5 API
 ;; ───────
 
 ;;   Use `M-x describe-function <NAME>' for details.
@@ -163,37 +195,7 @@
 ;;     Export an Org document as a string.
 
 
-;; 1.4.1 Command line interface
-;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-
-;;   `org-doc' provides an executable script which can be invoked like
-;;   this:
-
-;;   ┌────
-;;   │ $ cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
-;;   └────
-
-;;   Run `cask exec org-doc --help' to see available options.
-
-
-;; ◊ 1.4.1.1 Not using Cask?
-
-;;   Provided `org-doc' is installed via the built-in package manager, you
-;;   can invoke it from the shell like this:
-
-;;   ┌────
-;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- \
-;;   │     [OPTION]... ORG-FILE ELISP-FILE
-;;   └────
-
-;;   For example, to see available options, run
-
-;;   ┌────
-;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- --help
-;;   └────
-
-
-;; 1.5 Customization
+;; 1.6 Customization
 ;; ─────────────────
 
 ;;   The user can set a number of options which affect the exporting
@@ -259,7 +261,7 @@
 ;;   [Publishing options] http://orgmode.org/manual/Publishing-options.html
 
 
-;; 1.5.1 Inclusion of the table of contents (TOC)
+;; 1.6.1 Inclusion of the table of contents (TOC)
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   The table of content is normally inserted before the first headline of
@@ -285,7 +287,7 @@
 ;;   [Table of contents] http://orgmode.org/manual/Table-of-contents.html
 
 
-;; 1.5.2 Inclusion of subtrees
+;; 1.6.2 Inclusion of subtrees
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   • *in-file keyword* `#+EXCLUDE_TAGS'
@@ -311,7 +313,7 @@
 ;;     ⁃ *variable* `org-export-select-tags'
 
 
-;; 1.5.3 Inclusion of drawers
+;; 1.6.3 Inclusion of drawers
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   /Note/: you need to specify custom drawers using the `#+DRAWERS'
@@ -328,7 +330,7 @@
 ;;     ⁃ *variable* `org-export-with-drawers'
 
 
-;; 1.5.4 Inclusion of tags
+;; 1.6.4 Inclusion of tags
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   • *in-file option* `tags:'
@@ -341,7 +343,7 @@
 ;;     ⁃ *variable* `org-export-with-tags'
 
 
-;; 1.5.5 Export charset
+;; 1.6.5 Export charset
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   • *property* `:ascii-charset'
@@ -355,7 +357,7 @@
 ;;     ⁃ *command-line argument* `--charset' (`-c')
 
 
-;; 1.6 Similar projects
+;; 1.7 Similar projects
 ;; ────────────────────
 
 ;;   • [org2elcomment] - provides an interactive function to update the
