@@ -99,8 +99,8 @@
 ;; ───────────────────
 
 ;;   /Note/: these steps are written with assumption you're using Cask for
-;;   project management; otherwise, see "[Not using Cask?]" section below
-;;   for instructions on how to use `org-doc' CLI without Cask.
+;;   project management; otherwise, see [Not using Cask?] section below for
+;;   instructions on how to use `org-doc' CLI without Cask.
 
 ;;   1. [Optional] If you have installed `org-doc' manually, create a link
 ;;      to `org-doc':

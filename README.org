@@ -37,7 +37,7 @@ WIP.
 ** Getting started
 
 /Note/: these steps are written with assumption you're using Cask for project management;
-otherwise, see "[[#not-using-cask][Not using Cask?]]" section below for instructions on how to use =org-doc=
+otherwise, see [[#not-using-cask][Not using Cask?]] section below for instructions on how to use =org-doc=
 CLI without Cask.
 
 0. [Optional] If you have installed =org-doc= manually, create a link to =org-doc=:
