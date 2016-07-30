@@ -53,7 +53,7 @@ This subtree won't be exported!
     (it "should trim leading and trailing whitespace"
       (with-temp-buffer
         (insert buffer-content)
-        (setf export-result (org-doc:export-buffer-as-string))
+        (setf export-result (org-doc-export-buffer-as-string))
         (expect (string-match-p "^[^[:space:]]" export-result)
                 :to-be 0)
         (expect (string-match-p "^[^[:space:]]"
@@ -67,14 +67,14 @@ This subtree won't be exported!
     (it "should generate the table of contents by default"
       (with-temp-buffer
           (insert buffer-content)
-          (setf export-result (org-doc:export-buffer-as-string))
+          (setf export-result (org-doc-export-buffer-as-string))
           (expect export-result :to-match "Table of Contents")))
 
     (describe "Export mode"
       (it "should export an Org document in the `ascii' mode by default"
         (with-temp-buffer
           (insert buffer-content)
-          (setf export-result (org-doc:export-buffer-as-string))
+          (setf export-result (org-doc-export-buffer-as-string))
           (expect export-result :to-match
                   (rx-to-string `(char ,@ (cdr (assoc 'ascii org-ascii-underline)))))))
 
@@ -82,14 +82,14 @@ This subtree won't be exported!
         (--each '(latin1 ascii utf-8)
           (with-temp-buffer
             (insert buffer-content)
-            (setf export-result (org-doc:export-buffer-as-string `(:ascii-charset ,it)))
+            (setf export-result (org-doc-export-buffer-as-string `(:ascii-charset ,it)))
             (expect export-result :to-match
                     (rx-to-string `(char ,@(cdr (assoc it org-ascii-underline))))))
 
           (with-temp-buffer
             (insert buffer-content)
             (let ((org-ascii-charset it))
-              (setf export-result (org-doc:export-buffer-as-string)))
+              (setf export-result (org-doc-export-buffer-as-string)))
             (expect export-result :to-match
                     (rx-to-string `(char ,@(cdr (assoc it org-ascii-underline)))))))))
 
@@ -97,7 +97,7 @@ This subtree won't be exported!
       (it "should exclude the content of specific drawers"
         (with-temp-buffer
           (insert buffer-content)
-          (setf export-result (org-doc:export-buffer-as-string))
+          (setf export-result (org-doc-export-buffer-as-string))
           (expect export-result :to-match "I will be exported despite my name!")
           (expect export-result :not :to-match "I will be ignored during the export!")))
 
@@ -105,13 +105,13 @@ This subtree won't be exported!
         ;; FIXME default tag
         (with-temp-buffer
           (insert buffer-content)
-          (setf export-result (org-doc:export-buffer-as-string))
+          (setf export-result (org-doc-export-buffer-as-string))
           (expect export-result :not :to-match "This subtree won't be exported!")))
 
       (it "should be possible to exclude the table of contents from exporting"
         (with-temp-buffer
           (insert "#+OPTIONS: toc:nil\n* Headline\n** Headline")
-          (setf export-result (org-doc:export-buffer-as-string))
+          (setf export-result (org-doc-export-buffer-as-string))
           (expect export-result :not :to-match "Table of Contents"))))))
 
 (provide 'test-export)

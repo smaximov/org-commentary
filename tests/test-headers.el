@@ -27,12 +27,12 @@
 
 (describe "Match sections"
   (it "should match valid section headlines"
-    (-each org-doc::section-alist
+    (-each org-doc--section-alist
       (-lambda ((section (starting-headlines . _)))
         (ignore _)
         (--each starting-headlines
           (expect (format "Preceding text\n;;;%s:  \nSection content" it)
-                  :to-match (org-doc::headline-regexp section))))))
+                  :to-match (org-doc--headline-regexp section))))))
 
   (it "should detect valid sections"
     (with-temp-buffer
@@ -62,8 +62,8 @@
             (end nil))
         (expect (lambda ()
                   (insert buffer-content)
-                  (setf start (org-doc::section-content-start 'commentary)
-                        end (org-doc::section-content-end 'commentary start)))
+                  (setf start (org-doc--section-content-start 'commentary)
+                        end (org-doc--section-content-end 'commentary start)))
                 :not :to-throw 'error)
 
         (expect (buffer-substring start end)
@@ -102,8 +102,8 @@
         (expect (lambda ()
                   (with-temp-buffer
                     (insert it)
-                    (org-doc::section-content-end 'changelog
-                                                  (org-doc::section-content-start 'changelog))))
+                    (org-doc--section-content-end 'changelog
+                                                  (org-doc--section-content-start 'changelog))))
                 :to-throw 'error)))))
 
 (describe "Update headers"
@@ -139,7 +139,7 @@ It splits multiple paragraphs.")
 "))
       (with-temp-buffer
         (insert buffer-content-before)
-        (org-doc::update-comment-header 'commentary replacement)
+        (org-doc--update-comment-header 'commentary replacement)
         (expect (buffer-string)
                 :to-equal buffer-content-after)))))
 

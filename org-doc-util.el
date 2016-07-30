@@ -26,7 +26,7 @@
 (require 'rx)
 (require 'subr-x)
 
-(defun org-doc::comment-string (string)
+(defun org-doc--comment-string (string)
   "Comment out each non-blank line of the STRING using Lisp-style comments."
   (if (string-blank-p string)
       string
@@ -46,20 +46,20 @@
           (comment-region (point-min) (point-max))
           (buffer-string)))))
 
-(defconst org-doc::drawer-regexp (rx (one-or-more (or word (char ?- ?_))))
+(defconst org-doc--drawer-regexp (rx (one-or-more (or word (char ?- ?_))))
   "Regexp to match a valid drawer name.")
-(defconst org-doc::drawer-keyword-regexp
+(defconst org-doc--drawer-keyword-regexp
   (rx-to-string `(seq line-start
                       "#+DRAWERS:"
                       (one-or-more blank)
-                      (group (zero-or-more (regexp ,org-doc::drawer-regexp)
+                      (group (zero-or-more (regexp ,org-doc--drawer-regexp)
                                            (zero-or-more blank)))
                       line-end))
   "Regexp to match `#+DRAWERS: DRAWERS-VALUES' line.
 
 DRAWERS-VALUES is saved as the first match group upon successful match.")
 
-(defun org-doc::parse-custom-drawers ()
+(defun org-doc--parse-custom-drawers ()
   "Return the list of custom drawers defined with the `#+DRAWERS' keyword.
 
 Return nil if buffer doesn't define custom drawers."
@@ -70,7 +70,7 @@ Return nil if buffer doesn't define custom drawers."
             ;; keywords don't depend on case:
             (case-fold-search t)
             (word-separator-regexp (rx (one-or-more blank))))
-        (while (re-search-forward org-doc::drawer-keyword-regexp nil t)
+        (while (re-search-forward org-doc--drawer-keyword-regexp nil t)
           (setf drawers (append (split-string (match-string 1)
                                               word-separator-regexp t
                                               word-separator-regexp)

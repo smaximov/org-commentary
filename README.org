@@ -69,15 +69,15 @@ automatically; it may be used either from inside of Emacs or from the command li
 
 Use ~M-x describe-function <NAME>~ for details.
 
-- *command* ~org-doc:update~
+- *command* ~org-doc-update~
 
   Update library headers using the content of an Org document.
 
-- *function* ~org-doc:export-buffer-as-string~.
+- *function* ~org-doc-export-buffer-as-string~.
 
   Export the Org document opened in the current buffer as a string.
 
-- *function* ~org-doc:export-file-as-string~.
+- *function* ~org-doc-export-file-as-string~.
 
   Export an Org document as a string.
 

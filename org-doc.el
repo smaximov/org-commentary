@@ -131,15 +131,15 @@
 
 ;;   Use `M-x describe-function <NAME>' for details.
 
-;;   • *command* `org-doc:update'
+;;   • *command* `org-doc-update'
 
 ;;     Update library headers using the content of an Org document.
 
-;;   • *function* `org-doc:export-buffer-as-string'.
+;;   • *function* `org-doc-export-buffer-as-string'.
 
 ;;     Export the Org document opened in the current buffer as a string.
 
-;;   • *function* `org-doc:export-file-as-string'.
+;;   • *function* `org-doc-export-file-as-string'.
 
 ;;     Export an Org document as a string.
 
@@ -341,7 +341,8 @@
 ;; HEAD
 ;; ════
 
-;;   • `org-doc:update' doesn't return the export result when called
+;;   • use '-' as a namespace separator (instead of ':').
+;;   • `org-doc-update' doesn't return the export result when called
 ;;     interactively; a message is displayed instead.
 
 
@@ -356,13 +357,13 @@
 (require 'org-doc-headers)
 (require 'org-doc-util)
 
-(defconst org-doc:version "0.2.1")
+(defconst org-doc-version "0.2.1")
 
-(defun org-doc:update (section-name org elisp &optional ext-plist)
+(defun org-doc-update (section-name org elisp &optional ext-plist)
   "Update library headers using the content of an Org document.
 
 SECTION-NAME is a string indicating which section of the header to update.
-Valid values are defined in `org-doc::section-names'.
+Valid values are defined in `org-doc--section-names'.
 
 ORG is a name of Org document which contents will be exported.
 
@@ -375,15 +376,15 @@ still inferior to file-local settings.
 Function returns the converted content of the ORG file."
   (interactive
    (list (completing-read "Section [commentary, changelog, or history]: "
-                          org-doc::section-names)
+                          org-doc--section-names)
          (read-file-name "Org document: " nil nil 'confirm)
          (read-file-name "ELisp file: " nil nil 'confirm)))
 
-  (unless (org-doc::valid-section-name? section-name)
+  (unless (org-doc--valid-section-name? section-name)
     (error "Invalid section name: `%s'" section-name))
 
   (let* ((export-result
-          (org-doc:export-file-as-string org ext-plist))
+          (org-doc-export-file-as-string org ext-plist))
 
          ;; the buffer associated with the `elisp' file;
          ;; nil if no buffers visit that file:
@@ -395,11 +396,11 @@ Function returns the converted content of the ORG file."
 
     (unwind-protect
         (with-current-buffer elisp-buffer
-          (org-doc::update-comment-header (org-doc::section-symbol section-name)
+          (org-doc--update-comment-header (org-doc--section-symbol section-name)
                                           export-result)
           (basic-save-buffer)
           (if (called-interactively-p 'any)
-              (message "org-doc: updated %S." elisp)
+              (message "org-doc- updated %S." elisp)
             export-result))
 
       ;; kill the buffer associated with the `elisp' file

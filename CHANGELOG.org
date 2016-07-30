@@ -1,6 +1,7 @@
 #+OPTIONS: num:nil toc:nil
 * HEAD
-- =org-doc:update= doesn't return the export result when
+- use '-' as a namespace separator (instead of ':').
+- =org-doc-update= doesn't return the export result when
   called interactively; a message is displayed instead.
 * v0.2.1
 - initial release.

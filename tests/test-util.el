@@ -26,28 +26,28 @@
 (describe "Supporting functions"
   (describe "Comment string"
     (it "should comment out every non-blank line of a multiline string"
-      (expect (org-doc::comment-string "\n\nSome text.\nThe other line.\n\n")
+      (expect (org-doc--comment-string "\n\nSome text.\nThe other line.\n\n")
               :to-equal "\n\n;; Some text.\n;; The other line.\n\n"))
 
     (it "should leave empty/blank strings intact"
       (--each '("" " " "\t" "\n" " \n \n ")
-        (expect (org-doc::comment-string it)
+        (expect (org-doc--comment-string it)
                 :to-equal it))))
 
   (describe "Parse custom drawers"
     (it "should return nil if the buffer doesn't contain the `#DRAWERS' keyword"
       (with-temp-buffer
-        (expect (org-doc::parse-custom-drawers) :to-equal nil)))
+        (expect (org-doc--parse-custom-drawers) :to-equal nil)))
 
     (it "should return nil if the buffer has the `#DRAWERS' keyword with no value"
       (with-temp-buffer
         (insert "#+DRAWERS:\n\nSome text.")
-        (expect (org-doc::parse-custom-drawers) :to-equal nil)))
+        (expect (org-doc--parse-custom-drawers) :to-equal nil)))
 
     (it "should return the list of custom drawers if the buffer contains single `#DRAWERS' keyword"
       (with-temp-buffer
         (insert "#+DRAWERS: CUSTOM DRAWER\n\nSome text.")
-        (expect (org-doc::parse-custom-drawers) :to-equal '("CUSTOM" "DRAWER"))))
+        (expect (org-doc--parse-custom-drawers) :to-equal '("CUSTOM" "DRAWER"))))
 
     (it "should return the list of all drawers if the buffer contains multiple `#DRAWERS' keywords"
       (with-temp-buffer
@@ -58,7 +58,7 @@
 #+DRAWERS: MORE DRAWERS
 
 Some text.")
-        (expect (org-doc::parse-custom-drawers)
+        (expect (org-doc--parse-custom-drawers)
                 :to-equal '("MORE" "DRAWERS" "CUSTOM" "DRAWER"))))))
 
 (provide 'test-util)

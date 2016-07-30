@@ -84,7 +84,7 @@ Second-level content."
       (with-temp-file org-file (insert org-contents))
       (with-temp-file elisp-file (insert elisp-before))
 
-      (org-doc:update "history" org-file elisp-file '(:with-toc nil))
+      (org-doc-update "history" org-file elisp-file '(:with-toc nil))
       (expect (with-temp-buffer
                 (insert-file-contents elisp-file)
                 (buffer-string))

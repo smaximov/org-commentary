@@ -29,13 +29,13 @@
 
 (require 'org-doc)
 
-(defconst org-doc::cli-args-spec
+(defconst org-doc--cli-args-spec
   ;; ((NAME...) DEFAULT KEY OPTION-P VALIDATE HANDLER DATUM...)
-  `((("-h" "--help") nil nil nil nil org-doc::usage)
-    (("-v" "--version") nil nil nil nil org-doc::version)
+  `((("-h" "--help") nil nil nil nil org-doc--usage)
+    (("-v" "--version") nil nil nil nil org-doc--version)
     (("-n" "--dry-run") nil :dry-run)
     (("-q" "--silent") nil :silent)
-    (("-s" "--section") "commentary" :section t ,org-doc::section-names)
+    (("-s" "--section") "commentary" :section t ,org-doc--section-names)
     (("-c" "--charset") ascii :ascii-charset t (("ascii" . ascii)
                                                 ("utf-8" . utf-8)
                                                 ("latin1" . latin1))))
@@ -58,23 +58,23 @@ where
       when the argument is encountered;
     - DATUM (optional) extra arguments to pass when invoking HANDLER.")
 
-(defconst org-doc::cli-args-alist
+(defconst org-doc--cli-args-alist
   (-mapcat (-lambda ((names _ . rest))
              (-map (lambda (name)
                      `(,name ,@rest))
                    names))
-           org-doc::cli-args-spec))
+           org-doc--cli-args-spec))
 
-(defconst org-doc::cli-args-defaults-plist
+(defconst org-doc--cli-args-defaults-plist
   (let (defaults-plist)
-    (-each org-doc::cli-args-spec
+    (-each org-doc--cli-args-spec
       (-lambda ((_ default key . _))
         (when (and default key)
           (setf defaults-plist
                 (plist-put defaults-plist key default)))))
     defaults-plist))
 
-(defconst org-doc::usage
+(defconst org-doc--usage
   (format "org-doc %s
 Update comment headers of elisp files using Org mode documents.
 
@@ -93,25 +93,25 @@ Options:
     -c, --charset [ascii]         the charset allowed to represent various
                                   elements and objects during export
                                   [values: ascii, utf-8, latin1]"
-          org-doc:version))
+          org-doc-version))
 
-(define-error 'org-doc::cli-argument-error
+(define-error 'org-doc--cli-argument-error
   "Invalid command-line argument" 'user-error)
-(define-error 'org-doc::duplicate-argument
-  "Duplicate option or flag" 'org-doc::cli-argument-error)
-(define-error 'org-doc::invalid-option-value
-  "Invalid option value" 'org-doc::cli-argument-error)
-(define-error 'org-doc::unknown-argument
-  "Unkown option or flag" 'org-doc::cli-argument-error)
-(define-error 'org-doc::missing-value
-  "Missing option value" 'org-doc::cli-argument-error)
-(define-error 'org-doc::positional-arg-count-mismatch
-  "Too few or too many positional arguments" 'org-doc::cli-argument-error)
+(define-error 'org-doc--duplicate-argument
+  "Duplicate option or flag" 'org-doc--cli-argument-error)
+(define-error 'org-doc--invalid-option-value
+  "Invalid option value" 'org-doc--cli-argument-error)
+(define-error 'org-doc--unknown-argument
+  "Unkown option or flag" 'org-doc--cli-argument-error)
+(define-error 'org-doc--missing-value
+  "Missing option value" 'org-doc--cli-argument-error)
+(define-error 'org-doc--positional-arg-count-mismatch
+  "Too few or too many positional arguments" 'org-doc--cli-argument-error)
 
-(define-error 'org-doc::usage "")
-(define-error 'org-doc::version "")
+(define-error 'org-doc--usage "")
+(define-error 'org-doc--version "")
 
-(defun org-doc::handle (handler value datum)
+(defun org-doc--handle (handler value datum)
   "Invoke HANDLER with VALUE and extra data DATUM.
 
 HANDLER is either a function or a name of a signal defined
@@ -124,7 +124,7 @@ with `define-error'.  If HANDLER is none of the above, raise an error."
         (t
          (error "Invalid handler: %S" handler))))
 
-(defun org-doc::validate (value validator)
+(defun org-doc--validate (value validator)
   "Validate (and transform) VALUE using VALIDATOR.
 
 VALIDATOR should be either
@@ -147,7 +147,7 @@ if VALUE is invalid."
         (t
          (error "Invalid validator: %S" validator))))
 
-(defun org-doc::parse-args (args)
+(defun org-doc--parse-args (args)
   "Parse command line arguments ARGS.
 
 Result is a property list
@@ -158,7 +158,7 @@ Result is a property list
      :dry-run DRY-RUN-P)."
   (setf args (-remove-item "--" args))
   (when (null args)
-    (signal 'org-doc::usage nil))
+    (signal 'org-doc--usage nil))
   (let (positional args-plist)
     (while args
       (let ((argi (pop args))
@@ -172,7 +172,7 @@ Result is a property list
                       (string-empty-p value))
             (push value args)))
 
-        (-if-let (arg-spec (assoc argi org-doc::cli-args-alist))
+        (-if-let (arg-spec (assoc argi org-doc--cli-args-alist))
             ;; handle known arguments
             (let ((key (nth 1 arg-spec))
                   (option? (nth 2 arg-spec))
@@ -182,7 +182,7 @@ Result is a property list
 
               ;; handle duplicate arguments
               (when (plist-get args-plist key)
-                (signal 'org-doc::duplicate-argument
+                (signal 'org-doc--duplicate-argument
                         (format "option `%s' defined multiple times"
                                 argi)))
 
@@ -192,15 +192,15 @@ Result is a property list
 
                 ;; missing values
                 (unless value
-                  (signal 'org-doc::missing-value
+                  (signal 'org-doc--missing-value
                           (format "option `%s' requires a value"
                                   argi)))
 
                 ;; validation
                 (when validator
                   (setf value
-                        (or (org-doc::validate value validator)
-                            (signal 'org-doc::invalid-option-value
+                        (or (org-doc--validate value validator)
+                            (signal 'org-doc--invalid-option-value
                                     (format "invalid value for option `%s': %s"
                                             argi value))))))
 
@@ -209,18 +209,18 @@ Result is a property list
                       (plist-put args-plist key (if option? value t))))
 
               (when handler
-                (org-doc::handle handler (if option? value t) datum)))
+                (org-doc--handle handler (if option? value t) datum)))
           ;; handle unknown arguments
           (if (string-prefix-p "-" argi)
               ;; unknown options and flags
-              (signal 'org-doc::unknown-argument
+              (signal 'org-doc--unknown-argument
                       (format "unknown option or flag: `%s'" argi))
 
             ;; treat rest values as positional arguments
             (push argi positional)))))
 
     (when (/= 2 (length positional))
-      (signal 'org-doc::positional-arg-count-mismatch
+      (signal 'org-doc--positional-arg-count-mismatch
               (format "expected exactly 2 positional arguments; %s given"
                       (length positional))))
     (setf positional (reverse positional))
@@ -228,20 +228,20 @@ Result is a property list
     (setf args-plist (plist-put args-plist :org (nth 0 positional)))
     (setf args-plist (plist-put args-plist :elisp (nth 1 positional)))
 
-    (org-combine-plists org-doc::cli-args-defaults-plist args-plist)))
+    (org-combine-plists org-doc--cli-args-defaults-plist args-plist)))
 
-(defun org-doc::usage (&optional exit-code)
+(defun org-doc--usage (&optional exit-code)
   "Display `org-doc' usage information and exit.
 
 EXIT-CODE is an integer used as the exit status (defaults to 0)."
-  (message "%s" org-doc::usage)
+  (message "%s" org-doc--usage)
   (kill-emacs (or exit-code 0)))
 
 (defun org-doc ()
   "Parse command line arguments and update elisp library headers accordingly."
   (unwind-protect
       (condition-case error
-          (let* ((args (org-doc::parse-args argv))
+          (let* ((args (org-doc--parse-args argv))
 
                  ;; custom options
                  (org (plist-get args :org))
@@ -260,20 +260,20 @@ EXIT-CODE is an integer used as the exit status (defaults to 0)."
             ;; generate result
             (setf export-result
                   (if dry-run
-                      (org-doc:export-file-as-string org args)
-                    (org-doc:update section org elisp args)))
+                      (org-doc-export-file-as-string org args)
+                    (org-doc-update section org elisp args)))
 
             (unless silent
               (message "%s" export-result)))
 
         ;; handle errors
-        (org-doc::cli-argument-error
+        (org-doc--cli-argument-error
          (message "cli-error: %s." (cdr error))
-         (org-doc::usage 1))
-        (org-doc::usage
-         (org-doc::usage))
-        (org-doc::version
-         (message "org-doc %s" org-doc:version))
+         (org-doc--usage 1))
+        (org-doc--usage
+         (org-doc--usage))
+        (org-doc--version
+         (message "org-doc %s" org-doc-version))
         (error
          (message "%s" (string-join (mapcar (lambda (elt)
                                               (format "%s" elt))
