@@ -81,8 +81,8 @@
 ;; ───────────────────
 
 ;;   /Note/: these steps are written with assumption you're using [Cask]
-;;   for project management; otherwise, see "Not using Cask?" section below
-;;   for instructions on how to use `org-doc' CLI without Cask.
+;;   for project management; otherwise, see "[Not using Cask?]" section
+;;   below for instructions on how to use `org-doc' CLI without Cask.
 
 ;;   1. [Optional] If you have installed `org-doc' manually, create a link
 ;;      to `org-doc':
@@ -122,6 +122,8 @@
 
 
 ;;   [Cask] https://github.com/cask/cask
+
+;;   [Not using Cask?] See section 1.3.1.1
 
 ;;   [library header]
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html

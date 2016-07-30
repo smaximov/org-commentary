@@ -28,7 +28,7 @@ automatically; it may be used either from inside of Emacs or from the command li
 ** Getting started
 
 /Note/: these steps are written with assumption you're using [[https://github.com/cask/cask][Cask]] for project management;
-otherwise, see "Not using Cask?" section below for instructions on how to use =org-doc=
+otherwise, see "[[#not-using-cask][Not using Cask?]]" section below for instructions on how to use =org-doc=
 CLI without Cask.
 
 0. [Optional] If you have installed =org-doc= manually, create a link to =org-doc=:
@@ -93,6 +93,9 @@ Use ~M-x describe-function <NAME>~ for details.
 Run ~cask exec org-doc --help~ to see available options.
 
 **** Not using Cask?
+:PROPERTIES:
+:CUSTOM_ID: not-using-cask
+:END:
 
 Provided =org-doc= is installed via the built-in package manager, you can
 invoke it from the shell like this:
