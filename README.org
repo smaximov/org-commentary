@@ -25,9 +25,18 @@ into various formats, including a simple plain text format (=ascii= backend).
 This package employs these facilities to generate library headers from Org files
 automatically; it may be used either from inside of Emacs or from the command line.
 
+** Installation
+
+You can skip this section if you're going to use =org-doc= as a development dependency
+of a [[https://github.com/cask/cask][Cask]]-managed project.
+
+*** MELPA
+
+WIP.
+
 ** Getting started
 
-/Note/: these steps are written with assumption you're using [[https://github.com/cask/cask][Cask]] for project management;
+/Note/: these steps are written with assumption you're using Cask for project management;
 otherwise, see "[[#not-using-cask][Not using Cask?]]" section below for instructions on how to use =org-doc=
 CLI without Cask.
 

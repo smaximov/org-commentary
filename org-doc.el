@@ -31,16 +31,18 @@
 
 ;; 1 org-doc
 ;; .. 1.1 Why?
-;; .. 1.2 Getting started
-;; .. 1.3 API
-;; ..... 1.3.1 Command line interface
-;; .. 1.4 Customization
-;; ..... 1.4.1 Inclusion of the table of contents (TOC)
-;; ..... 1.4.2 Inclusion of subtrees
-;; ..... 1.4.3 Inclusion of drawers
-;; ..... 1.4.4 Inclusion of tags
-;; ..... 1.4.5 Export charset
-;; .. 1.5 Similar projects
+;; .. 1.2 Installation
+;; ..... 1.2.1 MELPA
+;; .. 1.3 Getting started
+;; .. 1.4 API
+;; ..... 1.4.1 Command line interface
+;; .. 1.5 Customization
+;; ..... 1.5.1 Inclusion of the table of contents (TOC)
+;; ..... 1.5.2 Inclusion of subtrees
+;; ..... 1.5.3 Inclusion of drawers
+;; ..... 1.5.4 Inclusion of tags
+;; ..... 1.5.5 Export charset
+;; .. 1.6 Similar projects
 
 
 ;; 1 org-doc
@@ -77,12 +79,28 @@
 ;;   [DRY] https://en.wikipedia.org/wiki/Don't_repeat_yourself
 
 
-;; 1.2 Getting started
+;; 1.2 Installation
+;; ────────────────
+
+;;   You can skip this section if you're going to use `org-doc' as a
+;;   development dependency of a [Cask]-managed project.
+
+
+;;   [Cask] https://github.com/cask/cask
+
+
+;; 1.2.1 MELPA
+;; ╌╌╌╌╌╌╌╌╌╌╌
+
+;;   WIP.
+
+
+;; 1.3 Getting started
 ;; ───────────────────
 
-;;   /Note/: these steps are written with assumption you're using [Cask]
-;;   for project management; otherwise, see "[Not using Cask?]" section
-;;   below for instructions on how to use `org-doc' CLI without Cask.
+;;   /Note/: these steps are written with assumption you're using Cask for
+;;   project management; otherwise, see "[Not using Cask?]" section below
+;;   for instructions on how to use `org-doc' CLI without Cask.
 
 ;;   1. [Optional] If you have installed `org-doc' manually, create a link
 ;;      to `org-doc':
@@ -121,15 +139,13 @@
 ;;   6. Commit.
 
 
-;;   [Cask] https://github.com/cask/cask
-
-;;   [Not using Cask?] See section 1.3.1.1
+;;   [Not using Cask?] See section 1.4.1.1
 
 ;;   [library header]
 ;;   https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html
 
 
-;; 1.3 API
+;; 1.4 API
 ;; ───────
 
 ;;   Use `M-x describe-function <NAME>' for details.
@@ -147,7 +163,7 @@
 ;;     Export an Org document as a string.
 
 
-;; 1.3.1 Command line interface
+;; 1.4.1 Command line interface
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   `org-doc' provides an executable script which can be invoked like
@@ -160,7 +176,7 @@
 ;;   Run `cask exec org-doc --help' to see available options.
 
 
-;; ◊ 1.3.1.1 Not using Cask?
+;; ◊ 1.4.1.1 Not using Cask?
 
 ;;   Provided `org-doc' is installed via the built-in package manager, you
 ;;   can invoke it from the shell like this:
@@ -177,7 +193,7 @@
 ;;   └────
 
 
-;; 1.4 Customization
+;; 1.5 Customization
 ;; ─────────────────
 
 ;;   The user can set a number of options which affect the exporting
@@ -243,7 +259,7 @@
 ;;   [Publishing options] http://orgmode.org/manual/Publishing-options.html
 
 
-;; 1.4.1 Inclusion of the table of contents (TOC)
+;; 1.5.1 Inclusion of the table of contents (TOC)
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   The table of content is normally inserted before the first headline of
@@ -269,7 +285,7 @@
 ;;   [Table of contents] http://orgmode.org/manual/Table-of-contents.html
 
 
-;; 1.4.2 Inclusion of subtrees
+;; 1.5.2 Inclusion of subtrees
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   • *in-file keyword* `#+EXCLUDE_TAGS'
@@ -295,7 +311,7 @@
 ;;     ⁃ *variable* `org-export-select-tags'
 
 
-;; 1.4.3 Inclusion of drawers
+;; 1.5.3 Inclusion of drawers
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   /Note/: you need to specify custom drawers using the `#+DRAWERS'
@@ -312,7 +328,7 @@
 ;;     ⁃ *variable* `org-export-with-drawers'
 
 
-;; 1.4.4 Inclusion of tags
+;; 1.5.4 Inclusion of tags
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   • *in-file option* `tags:'
@@ -325,7 +341,7 @@
 ;;     ⁃ *variable* `org-export-with-tags'
 
 
-;; 1.4.5 Export charset
+;; 1.5.5 Export charset
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   • *property* `:ascii-charset'
@@ -339,7 +355,7 @@
 ;;     ⁃ *command-line argument* `--charset' (`-c')
 
 
-;; 1.5 Similar projects
+;; 1.6 Similar projects
 ;; ────────────────────
 
 ;;   • [org2elcomment] - provides an interactive function to update the
