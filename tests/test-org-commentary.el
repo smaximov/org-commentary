@@ -113,7 +113,7 @@ Second-level content."
       (with-temp-file org-file (insert org-contents))
       (with-temp-file elisp-file (insert elisp-before))
 
-      (expect (lambda () (org-export:update org-file elisp-file))
+      (expect (lambda () (org-commentary-update "commentary" org-file elisp-file))
               :to-throw 'error))))
 
 (provide 'test-org-commentary)
