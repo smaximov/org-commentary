@@ -25,8 +25,8 @@
 ;; Ensure undercover is required before the library code
 (when (require 'undercover nil t)
   (undercover "*.el"))
-(require 'org-doc)
-(require 'org-doc-cli)
+(require 'org-commentary)
+(require 'org-commentary-cli)
 
 (provide 'setup-tests)
 ;;; setup-tests.el ends here

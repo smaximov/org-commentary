@@ -19,7 +19,7 @@
 
 ;;; Commentary:
 
-;; See the commentary section in `org-doc.el'.
+;; See the commentary section in `org-commentary.el'.
 
 ;;; Code:
 
@@ -27,12 +27,12 @@
 
 (describe "Match sections"
   (it "should match valid section headlines"
-    (-each org-doc--section-alist
+    (-each org-commentary--section-alist
       (-lambda ((section (starting-headlines . _)))
         (ignore _)
         (--each starting-headlines
           (expect (format "Preceding text\n;;;%s:  \nSection content" it)
-                  :to-match (org-doc--headline-regexp section))))))
+                  :to-match (org-commentary--headline-regexp section))))))
 
   (it "should detect valid sections"
     (with-temp-buffer
@@ -62,8 +62,8 @@
             (end nil))
         (expect (lambda ()
                   (insert buffer-content)
-                  (setf start (org-doc--section-content-start 'commentary)
-                        end (org-doc--section-content-end 'commentary start)))
+                  (setf start (org-commentary--section-content-start 'commentary)
+                        end (org-commentary--section-content-end 'commentary start)))
                 :not :to-throw 'error)
 
         (expect (buffer-substring start end)
@@ -102,8 +102,8 @@
         (expect (lambda ()
                   (with-temp-buffer
                     (insert it)
-                    (org-doc--section-content-end 'changelog
-                                                  (org-doc--section-content-start 'changelog))))
+                    (org-commentary--section-content-end 'changelog
+                                                  (org-commentary--section-content-start 'changelog))))
                 :to-throw 'error)))))
 
 (describe "Update headers"
@@ -139,7 +139,7 @@ It splits multiple paragraphs.")
 "))
       (with-temp-buffer
         (insert buffer-content-before)
-        (org-doc--update-comment-header 'commentary replacement)
+        (org-commentary--update-comment-header 'commentary replacement)
         (expect (buffer-string)
                 :to-equal buffer-content-after)))))
 

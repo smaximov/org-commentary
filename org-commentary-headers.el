@@ -1,4 +1,4 @@
-;;; org-doc-headers.el --- functions to manipulate comment headers of elisp files -*- lexical-binding: t; -*-
+;;; org-commentary-headers.el --- functions to manipulate comment headers of elisp files -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016 Sergei Maximov
 
@@ -19,16 +19,16 @@
 
 ;;; Commentary:
 
-;; See the commentary section in `org-doc.el'.
+;; See the commentary section in `org-commentary.el'.
 
 ;;; Code:
 
 (require 'dash)
 (require 'rx)
 
-(require 'org-doc-util)
+(require 'org-commentary-util)
 
-(defun org-doc--section-headline-regexp (section-regexp)
+(defun org-commentary--section-headline-regexp (section-regexp)
   "Create the regexp to search for a section's headline.
 
 SECTION-REGEXP is a regexp matching section's name."
@@ -41,76 +41,76 @@ SECTION-REGEXP is a regexp matching section's name."
                       (zero-or-more blank)
                       line-end)))
 
-(defconst org-doc--section-alist
+(defconst org-commentary--section-alist
   '((commentary (("Commentary") . ("Change Log" "History" "Code")))
     (changelog (("Change Log" "History") . ("Commentary" "Code"))))
   "Section symbol -> (starting-headlines . terminating-headlines).")
 
-(defconst org-doc--section-regexp-alist
+(defconst org-commentary--section-regexp-alist
   (-map (-lambda ((section (starting-headlines . terminating-headlines)))
           (cons section
-                (cons (org-doc--section-headline-regexp (rx-to-string `(or ,@starting-headlines)))
-                      (org-doc--section-headline-regexp (rx-to-string `(or ,@terminating-headlines))))))
-        org-doc--section-alist)
+                (cons (org-commentary--section-headline-regexp (rx-to-string `(or ,@starting-headlines)))
+                      (org-commentary--section-headline-regexp (rx-to-string `(or ,@terminating-headlines))))))
+        org-commentary--section-alist)
   "Section symbol -> (headline-regexp . terminating-regexp).")
 
-(defconst org-doc--sections '(commentary changelog)
+(defconst org-commentary--sections '(commentary changelog)
   "Valid section symbols.")
 
-(defconst org-doc--section-names '("commentary" "changelog" "history")
+(defconst org-commentary--section-names '("commentary" "changelog" "history")
   "Valid section names.")
 
-(defconst org-doc--section-name-alist
+(defconst org-commentary--section-name-alist
   '(("commentary" . commentary)
     ("changelog" . changelog)
     ("history" . changelog))
-  "Association list mapping `org-doc--section-names' to `org-doc--sections'.")
+  "Association list mapping `org-commentary--section-names' to `org-commentary--sections'.")
 
-(defun org-doc--valid-section-name? (section-name)
-  "Return nil if SECTION-NAME is not a member of `org-doc--section-names'."
-  (member section-name org-doc--section-names))
+(defun org-commentary--valid-section-name? (section-name)
+  "Return nil if SECTION-NAME is not a member of `org-commentary--section-names'."
+  (member section-name org-commentary--section-names))
 
-(defun org-doc--section-symbol (section-name)
+(defun org-commentary--section-symbol (section-name)
   "Return the symbol corresponging to SECTION-NAME."
-  (cdr (assoc section-name org-doc--section-name-alist)))
+  (cdr (assoc section-name org-commentary--section-name-alist)))
 
-(defun org-doc--validate-section! (section)
+(defun org-commentary--validate-section! (section)
   "Check if SECTION is one of '(changelog commentary)', signal an error otherwise."
-  (unless (memq section org-doc--sections)
+  (unless (memq section org-commentary--sections)
     (error "Unkown section `%s'.  Valid sections are `changelog' and `commentary'" section)))
 
-(defun org-doc--headline-regexp (section)
+(defun org-commentary--headline-regexp (section)
   "Return headline regexp for SECTION."
-  (org-doc--validate-section! section)
-  (cadr (assoc section org-doc--section-regexp-alist)))
+  (org-commentary--validate-section! section)
+  (cadr (assoc section org-commentary--section-regexp-alist)))
 
-(defun org-doc--terminate-regexp (section)
+(defun org-commentary--terminate-regexp (section)
   "Return terminating regexp for SECTION."
-  (org-doc--validate-section! section)
-  (cddr (assoc section org-doc--section-regexp-alist)))
+  (org-commentary--validate-section! section)
+  (cddr (assoc section org-commentary--section-regexp-alist)))
 
-(defun org-doc--section-content-start (section &optional start)
+(defun org-commentary--section-content-start (section &optional start)
   "Return the position at the start of SECTION content.
 
 START is the buffer position where the search is started.
 If START is nil, it defaults to (point-min)."
   (let ((case-fold-search nil)
-        (headline-regexp (org-doc--headline-regexp section)))
+        (headline-regexp (org-commentary--headline-regexp section)))
     (save-excursion
       (save-match-data
         (goto-char (or start (point-min)))
         (or (re-search-forward headline-regexp nil t)
             (error "Section `%s' is not found" section))))))
 
-(defun org-doc--section-content-end (section start)
+(defun org-commentary--section-content-end (section start)
   "Return the position at the end of SECTION content.
 
 START is the buffer position where the search is started.
 The value START should be obtained by invoking
-`org-doc--section-content-start'."
+`org-commentary--section-content-start'."
   (let ((case-fold-search nil)
-        (headline-regexp (org-doc--headline-regexp section))
-        (terminate-regexp (org-doc--terminate-regexp section)))
+        (headline-regexp (org-commentary--headline-regexp section))
+        (terminate-regexp (org-commentary--terminate-regexp section)))
     (save-excursion
       (save-match-data
         (goto-char start)
@@ -120,16 +120,16 @@ The value START should be obtained by invoking
           (error "Section `%s' is unterminated" section))
         (match-beginning 0)))))
 
-(defun org-doc--update-comment-header (section content)
+(defun org-commentary--update-comment-header (section content)
   "Replace elips file header section denoted by SECTION with CONTENT.
 
 CONTENT is commented out before inserting."
   (save-excursion
-   (let* ((start (org-doc--section-content-start section))
-          (end (org-doc--section-content-end section start)))
+   (let* ((start (org-commentary--section-content-start section))
+          (end (org-commentary--section-content-end section start)))
      (kill-region start end)
      (goto-char start)
-     (insert "\n\n" (org-doc--comment-string content) "\n\n"))))
+     (insert "\n\n" (org-commentary--comment-string content) "\n\n"))))
 
-(provide 'org-doc-headers)
-;;; org-doc-headers.el ends here
+(provide 'org-commentary-headers)
+;;; org-commentary-headers.el ends here

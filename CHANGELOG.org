@@ -1,7 +1,8 @@
 #+OPTIONS: num:nil toc:nil
 * HEAD
+- rename the package to =org-commentary=.
 - use '-' as a namespace separator (instead of ':').
-- =org-doc-update= doesn't return the export result when
+- =org-commentary-update= doesn't return the export result when
   called interactively; a message is displayed instead.
 * v0.2.1
 - initial release.

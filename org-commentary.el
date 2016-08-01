@@ -1,4 +1,4 @@
-;;; org-doc.el --- generate or update conventional library headers using Org mode files -*- lexical-binding: t; -*-
+;;; org-commentary.el --- generate or update conventional library headers using Org mode files -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016 Sergei Maximov
 
@@ -7,7 +7,7 @@
 ;; Version: 0.2.1
 ;; Package-Requires: ((dash "2.0") (emacs "24.4") (org "8.0"))
 ;; Keywords: convenience, docs, tools
-;; URL: https://github.com/smaximov/org-doc
+;; URL: https://github.com/smaximov/org-commentary
 
 ;; This file is not part of GNU Emacs.
 
@@ -29,7 +29,7 @@
 ;; Table of Contents
 ;; ─────────────────
 
-;; 1 org-doc
+;; 1 org-commentary
 ;; .. 1.1 Why?
 ;; .. 1.2 Installation
 ;; ..... 1.2.1 MELPA
@@ -46,11 +46,11 @@
 ;; .. 1.7 Similar projects
 
 
-;; 1 org-doc
-;; ═════════
+;; 1 org-commentary
+;; ════════════════
 
-;;   `org-doc' — generate or update conventional [library headers] using
-;;   Org mode files.
+;;   `org-commentary' — generate or update conventional [library headers]
+;;   using Org mode files.
 
 
 ;;   [library headers]
@@ -83,7 +83,7 @@
 ;; 1.2 Installation
 ;; ────────────────
 
-;;   You can skip this section if you're going to use `org-doc' as a
+;;   You can skip this section if you're going to use `org-commentary' as a
 ;;   development dependency of a [Cask]-managed project.
 
 
@@ -101,20 +101,21 @@
 
 ;;   /Note/: these steps are written with assumption you're using Cask for
 ;;   project management; otherwise, see [Not using Cask?] section below for
-;;   instructions on how to use `org-doc' CLI without Cask.
+;;   instructions on how to use `org-commentary' CLI without Cask.
 
-;;   1. [Optional] If you have installed `org-doc' manually, create a link
-;;      to `org-doc':
+;;   1. [Optional] If you have installed `org-commentary' manually, create
+;;      a link to `org-commentary':
 
 ;;      ┌────
-;;      │ $ cask link org-doc path/to/org-doc/installation
+;;      │ $ cask link org-commentary path/to/org-commentary/installation
 ;;      └────
 
-;;   2. Add `org-doc' to the development dependencies of your library:
+;;   2. Add `org-commentary' to the development dependencies of your
+;;      library:
 
 ;;      ┌────
 ;;      │ (development
-;;      │  (depends-on "org-doc"))
+;;      │  (depends-on "org-commentary"))
 ;;      └────
 
 ;;      Fetch dependencies:
@@ -128,13 +129,13 @@
 ;;   4. Generate /Commentary/ section of the library headers:
 
 ;;      ┌────
-;;      │ $ cask exec org-doc README.org your-package.el
+;;      │ $ cask exec org-commentary README.org your-package.el
 ;;      └────
 
 ;;   5. [Optional] Generate /Change Log/ section of the library headers:
 
 ;;      ┌────
-;;      │ $ cask exec org-doc --section changelog CHANGELOG.org your-package.el
+;;      │ $ cask exec org-commentary --section changelog CHANGELOG.org your-package.el
 ;;      └────
 
 ;;   6. Commit.
@@ -149,31 +150,31 @@
 ;; 1.4 Command line interface
 ;; ──────────────────────────
 
-;;   `org-doc' provides an executable script which can be invoked like
-;;   this:
+;;   `org-commentary' provides an executable script which can be invoked
+;;   like this:
 
 ;;   ┌────
-;;   │ $ cask exec org-doc [OPTION]... ORG-FILE ELISP-FILE
+;;   │ $ cask exec org-commentary [OPTION]... ORG-FILE ELISP-FILE
 ;;   └────
 
-;;   Run `cask exec org-doc --help' to see available options.
+;;   Run `cask exec org-commentary --help' to see available options.
 
 
 ;; 1.4.1 Not using Cask?
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-;;   Provided `org-doc' is installed via the built-in package manager, you
-;;   can invoke it from the shell like this:
+;;   Provided `org-commentary' is installed via the built-in package
+;;   manager, you can invoke it from the shell like this:
 
 ;;   ┌────
-;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- \
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f org-commentary -- \
 ;;   │     [OPTION]... ORG-FILE ELISP-FILE
 ;;   └────
 
 ;;   For example, to see available options, run
 
 ;;   ┌────
-;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-doc-cli -f org-doc -- --help
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f org-commentary -- --help
 ;;   └────
 
 
@@ -182,15 +183,15 @@
 
 ;;   Use `M-x describe-function <NAME>' for details.
 
-;;   • *command* `org-doc-update'
+;;   • *command* `org-commentary-update'
 
 ;;     Update library headers using the content of an Org document.
 
-;;   • *function* `org-doc-export-buffer-as-string'.
+;;   • *function* `org-commentary-export-buffer-as-string'.
 
 ;;     Export the Org document opened in the current buffer as a string.
 
-;;   • *function* `org-doc-export-file-as-string'.
+;;   • *function* `org-commentary-export-file-as-string'.
 
 ;;     Export an Org document as a string.
 
@@ -275,7 +276,7 @@
 ;;     Synonyms:
 
 ;;     ⁃ *property* `:toc'
-;;     ⁃ *variable* `org-doc-with-toc'
+;;     ⁃ *variable* `org-commentary-with-toc'
 
 ;;   • *in-file keyword* `#+TOC'
 
@@ -363,8 +364,8 @@
 ;;   • [org2elcomment] - provides an interactive function to update the
 ;;     commentary section of an Emacs Lisp file using the contents of an
 ;;     Org file opened in the current buffer.
-;;   • [make-readme-markdown] - in contrast to `org-doc', this package
-;;     treats an Emacs Lisp file as the canonical source of
+;;   • [make-readme-markdown] - in contrast to `org-commentary', this
+;;     package treats an Emacs Lisp file as the canonical source of
 ;;     documentation. That file is used to generate `README' in the
 ;;     Markdown format. The package provides additional features like
 ;;     auto-detected badges and API documentation of public functions.
@@ -379,8 +380,9 @@
 ;; HEAD
 ;; ════
 
+;;   • rename the package to `org-commentary'.
 ;;   • use '-' as a namespace separator (instead of ':').
-;;   • `org-doc-update' doesn't return the export result when called
+;;   • `org-commentary-update' doesn't return the export result when called
 ;;     interactively; a message is displayed instead.
 
 
@@ -391,17 +393,17 @@
 
 ;;; Code:
 
-(require 'org-doc-export)
-(require 'org-doc-headers)
-(require 'org-doc-util)
+(require 'org-commentary-export)
+(require 'org-commentary-headers)
+(require 'org-commentary-util)
 
-(defconst org-doc-version "0.2.1")
+(defconst org-commentary-version "0.2.1")
 
-(defun org-doc-update (section-name org elisp &optional ext-plist)
+(defun org-commentary-update (section-name org elisp &optional ext-plist)
   "Update library headers using the content of an Org document.
 
 SECTION-NAME is a string indicating which section of the header to update.
-Valid values are defined in `org-doc--section-names'.
+Valid values are defined in `org-commentary--section-names'.
 
 ORG is a name of Org document which contents will be exported.
 
@@ -414,15 +416,15 @@ still inferior to file-local settings.
 Function returns the converted content of the ORG file."
   (interactive
    (list (completing-read "Section [commentary, changelog, or history]: "
-                          org-doc--section-names)
+                          org-commentary--section-names)
          (read-file-name "Org document: " nil nil 'confirm)
          (read-file-name "ELisp file: " nil nil 'confirm)))
 
-  (unless (org-doc--valid-section-name? section-name)
+  (unless (org-commentary--valid-section-name? section-name)
     (error "Invalid section name: `%s'" section-name))
 
   (let* ((export-result
-          (org-doc-export-file-as-string org ext-plist))
+          (org-commentary-export-file-as-string org ext-plist))
 
          ;; the buffer associated with the `elisp' file;
          ;; nil if no buffers visit that file:
@@ -434,11 +436,11 @@ Function returns the converted content of the ORG file."
 
     (unwind-protect
         (with-current-buffer elisp-buffer
-          (org-doc--update-comment-header (org-doc--section-symbol section-name)
+          (org-commentary--update-comment-header (org-commentary--section-symbol section-name)
                                           export-result)
           (basic-save-buffer)
           (if (called-interactively-p 'any)
-              (message "org-doc- updated %S." elisp)
+              (message "org-commentary- updated %S." elisp)
             export-result))
 
       ;; kill the buffer associated with the `elisp' file
@@ -446,5 +448,5 @@ Function returns the converted content of the ORG file."
       (unless elisp-buffer-visited?
         (kill-buffer elisp-buffer)))))
 
-(provide 'org-doc)
-;;; org-doc.el ends here
+(provide 'org-commentary)
+;;; org-commentary.el ends here

@@ -1,4 +1,4 @@
-;;; org-doc-export.el --- custom Org mode export backend and helper functions -*- lexical-binding: t; -*-
+;;; org-commentary-export.el --- custom Org mode export backend and helper functions -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016 Sergei Maximov
 
@@ -24,7 +24,7 @@
 ;; present in the `ascii' backend I find superfuous for comment headers of elisp files
 ;; (e.g., hardcoded document title block in `org-ascii-template').
 
-;; `org-doc' emphasizes the control of which parts of a Org document you want to export.
+;; `org-commentary' emphasizes the control of which parts of a Org document you want to export.
 ;; It uses drawers and tags to define what needs to be excluded from the resulting document.
 ;; While tags exclusion worked fine in the existing Org mode code, exporting of drawer
 ;; was quite broken in Org mode versions prior to 8.3. Org mode recognized only few built-in
@@ -34,7 +34,7 @@
 
 ;; But the problem in earlier versions of Org mode was that the support for custom drawers
 ;; defined with the `#+DRAWERS' keyword didn't extend to exporting.  Org mode just
-;; didn't parse custom drawers defined in an Org file.  So to work around this issue, `org-doc'
+;; didn't parse custom drawers defined in an Org file.  So to work around this issue, `org-commentary'
 ;; parses `#+DRAWERS' manually to find out which custom drawers are defined in an Org file
 ;; and augments the `org-drawers' variable with those custom drawers before starting export.
 
@@ -42,9 +42,9 @@
 
 (require 'ox)
 
-(require 'org-doc-util)
+(require 'org-commentary-util)
 
-(defun org-doc--template (contents info)
+(defun org-commentary--template (contents info)
   "Return complete document string after conversion.
 
 CONTENTS is the transcoded contents string.  INFO is a plist
@@ -57,26 +57,26 @@ backend."
      (when depth
        (concat
         ;; FIXME: org-ascii--build-toc is "private".
-        ;; FIXME: should we write `org-doc--build-toc'?
+        ;; FIXME: should we write `org-commentary--build-toc'?
         (org-ascii--build-toc info (and (wholenump depth) depth))
         "\n\n\n")))
    contents))
 
-(org-export-define-derived-backend 'org-doc--ascii 'ascii
-  :translate-alist '((template . org-doc--template)))
+(org-export-define-derived-backend 'org-commentary--ascii 'ascii
+  :translate-alist '((template . org-commentary--template)))
 
 ;; Silence Emacs complaining about the undefined `org-drawers' variable.
 (defvar org-drawers)
 
-(defun org-doc--buffer-drawers ()
+(defun org-commentary--buffer-drawers ()
   "Return the list of Org mode drawers which the current buffer is heard of.
 
 This function is provided for compatibility with Org mode versions prior to 8.3.
 On later versions the return value is always nil"
   (when (version< org-version "8.3")
-    (append org-drawers (org-doc--parse-custom-drawers))))
+    (append org-drawers (org-commentary--parse-custom-drawers))))
 
-(defun org-doc-export-buffer-as-string (&optional ext-plist)
+(defun org-commentary-export-buffer-as-string (&optional ext-plist)
   "Export the Org document opened in the current buffer as a string.
 
 Optional argument EXT-PLIST, when provided, is a property list
@@ -84,10 +84,10 @@ with external parameters overriding Org default settings, but
 still inferior to file-local settings.
 
 The result is stripped from leading and trailing whitespace."
-  (let ((org-drawers (org-doc--buffer-drawers)))
-    (string-trim (org-export-as 'org-doc--ascii nil nil nil ext-plist))))
+  (let ((org-drawers (org-commentary--buffer-drawers)))
+    (string-trim (org-export-as 'org-commentary--ascii nil nil nil ext-plist))))
 
-(defun org-doc-export-file-as-string (file &optional ext-plist)
+(defun org-commentary-export-file-as-string (file &optional ext-plist)
   "Export the Org file FILE as a string.
 
 Optional argument EXT-PLIST, when provided, is a property list
@@ -97,7 +97,7 @@ still inferior to file-local settings.
 The result is stripped from leading and trailing whitespace."
   (with-temp-buffer
     (insert-file-contents (expand-file-name file))
-    (org-doc-export-buffer-as-string ext-plist)))
+    (org-commentary-export-buffer-as-string ext-plist)))
 
-(provide 'org-doc-export)
-;;; org-doc-export.el ends here
+(provide 'org-commentary-export)
+;;; org-commentary-export.el ends here

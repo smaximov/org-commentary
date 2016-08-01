@@ -1,4 +1,4 @@
-;;; test-org-doc.el --- test public function and commands -*- lexical-binding: t -*-
+;;; test-org-commentary.el --- test public function and commands -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2016 Sergei Maximov
 
@@ -28,8 +28,8 @@
     :var (org-file elisp-file org-contents elisp-before elisp-after)
 
     (before-each
-      (setf org-file (make-temp-file "org-doc-"))
-      (setf elisp-file (make-temp-file "org-doc-")))
+      (setf org-file (make-temp-file "org-commentary-"))
+      (setf elisp-file (make-temp-file "org-commentary-")))
 
     (after-each
       (delete-file org-file)
@@ -84,7 +84,7 @@ Second-level content."
       (with-temp-file org-file (insert org-contents))
       (with-temp-file elisp-file (insert elisp-before))
 
-      (org-doc-update "history" org-file elisp-file '(:with-toc nil))
+      (org-commentary-update "history" org-file elisp-file '(:with-toc nil))
       (expect (with-temp-buffer
                 (insert-file-contents elisp-file)
                 (buffer-string))
@@ -116,5 +116,5 @@ Second-level content."
       (expect (lambda () (org-export:update org-file elisp-file))
               :to-throw 'error))))
 
-(provide 'test-org-doc)
-;;; test-org-doc.el ends here
+(provide 'test-org-commentary)
+;;; test-org-commentary.el ends here

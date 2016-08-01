@@ -1,7 +1,7 @@
 (source gnu)
 (source melpa)
 
-(package-file "org-doc.el")
+(package-file "org-commentary.el")
 
 (files "*.el")
 
