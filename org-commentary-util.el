@@ -31,20 +31,20 @@
   (if (string-blank-p string)
       string
     (with-temp-buffer
-        ;; enforce Lisp-style comments
-        (let ((comment-style 'plain)
-              (comment-start ";")
-              (comment-end "")
-              (comment-padding " ")
-              ;; number of comment characters to insert by `comment-region';
-              ;; this value is doubled if `comment-style' is `plain';
-              ;; so `comment-add' * 2 (two) characters will be inserted:
-              (comment-add 1)
-              (comment-empty-lines nil)
-              (comment-quote-nested nil))
-          (insert string)
-          (comment-region (point-min) (point-max))
-          (buffer-string)))))
+      ;; enforce Lisp-style comments
+      (let ((comment-style 'plain)
+            (comment-start ";")
+            (comment-end "")
+            (comment-padding " ")
+            ;; number of comment characters to insert by `comment-region';
+            ;; this value is doubled if `comment-style' is `plain';
+            ;; so `comment-add' * 2 (two) characters will be inserted:
+            (comment-add 1)
+            (comment-empty-lines nil)
+            (comment-quote-nested nil))
+        (insert string)
+        (comment-region (point-min) (point-max))
+        (buffer-string)))))
 
 (defconst org-commentary--drawer-regexp (rx (one-or-more (or word (char ?- ?_))))
   "Regexp to match a valid drawer name.")

@@ -98,12 +98,13 @@
 
        "))
       (--each (list buffer-content-duplicate-sections
-                   buffer-content-unterminated-section)
+                    buffer-content-unterminated-section)
         (expect (lambda ()
                   (with-temp-buffer
                     (insert it)
                     (org-commentary--section-content-end 'changelog
-                                                  (org-commentary--section-content-start 'changelog))))
+                                                         (org-commentary--section-content-start
+                                                          'changelog))))
                 :to-throw 'error)))))
 
 (describe "Update headers"

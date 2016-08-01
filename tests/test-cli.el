@@ -43,7 +43,7 @@
               :to-equal "transformed value")
 
       (expect (org-commentary--validate "absent" validator)
-             :to-be nil)))
+              :to-be nil)))
 
   (it "should validate and transform using an association list"
     (let ((validator '(("present" . present)
@@ -55,7 +55,8 @@
               :to-be nil)))
 
   (it "should raise an error if a validator is not a function or a list"
-    (expect (lambda () (org-commentary--validate "value" 'not-a-list-or-a-function))
+    (expect (lambda () (org-commentary--validate "value"
+                                                 'not-a-list-or-a-function))
             :to-throw 'error)))
 
 (describe "Handle values"
@@ -86,7 +87,7 @@
 
   (it "should fail when an option is defined multiple times"
     (expect (lambda () (org-commentary--parse-args '("-s" "commentary" "readme.org"
-                                              "--section" "history" "file.el")))
+                                                     "--section" "history" "file.el")))
             :to-throw 'org-commentary--duplicate-argument))
 
   (it "should fail when provided with unknown option or flag"
@@ -107,7 +108,8 @@
 
   (it "should support separating long options from values using both space and `='"
     (--each '(("--section" "history") ("--section=history"))
-      (expect (plist-get (org-commentary--parse-args `("readme.org" "file.el" ,@it)) :section)
+      (expect (plist-get (org-commentary--parse-args `("readme.org" "file.el" ,@it))
+                         :section)
               :to-equal "history")))
 
   (describe "Defaults"
@@ -122,7 +124,8 @@
               :to-equal "commentary"))
 
     (it "should assume `--charset' is `ascii' by default"
-      (expect (plist-get (org-commentary--parse-args '("readme.org" "file.el")) :ascii-charset)
+      (expect (plist-get (org-commentary--parse-args '("readme.org" "file.el"))
+                         :ascii-charset)
               :to-be 'ascii))
 
     (it "should transform valid `--charset' values to the corresponding symbols"

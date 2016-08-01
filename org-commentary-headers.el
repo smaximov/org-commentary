@@ -49,8 +49,10 @@ SECTION-REGEXP is a regexp matching section's name."
 (defconst org-commentary--section-regexp-alist
   (-map (-lambda ((section (starting-headlines . terminating-headlines)))
           (cons section
-                (cons (org-commentary--section-headline-regexp (rx-to-string `(or ,@starting-headlines)))
-                      (org-commentary--section-headline-regexp (rx-to-string `(or ,@terminating-headlines))))))
+                (cons (org-commentary--section-headline-regexp
+                       (rx-to-string `(or ,@starting-headlines)))
+                      (org-commentary--section-headline-regexp
+                       (rx-to-string `(or ,@terminating-headlines))))))
         org-commentary--section-alist)
   "Section symbol -> (headline-regexp . terminating-regexp).")
 
@@ -125,11 +127,11 @@ The value START should be obtained by invoking
 
 CONTENT is commented out before inserting."
   (save-excursion
-   (let* ((start (org-commentary--section-content-start section))
-          (end (org-commentary--section-content-end section start)))
-     (kill-region start end)
-     (goto-char start)
-     (insert "\n\n" (org-commentary--comment-string content) "\n\n"))))
+    (let* ((start (org-commentary--section-content-start section))
+           (end (org-commentary--section-content-end section start)))
+      (kill-region start end)
+      (goto-char start)
+      (insert "\n\n" (org-commentary--comment-string content) "\n\n"))))
 
 (provide 'org-commentary-headers)
 ;;; org-commentary-headers.el ends here

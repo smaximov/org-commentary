@@ -437,7 +437,7 @@ Function returns the converted content of the ORG file."
     (unwind-protect
         (with-current-buffer elisp-buffer
           (org-commentary--update-comment-header (org-commentary--section-symbol section-name)
-                                          export-result)
+                                                 export-result)
           (basic-save-buffer)
           (if (called-interactively-p 'any)
               (message "org-commentary- updated %S." elisp)

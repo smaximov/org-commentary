@@ -232,7 +232,8 @@ Result is a property list
     (setf args-plist (plist-put args-plist :org (nth 0 positional)))
     (setf args-plist (plist-put args-plist :elisp (nth 1 positional)))
 
-    (org-combine-plists org-commentary--cli-args-defaults-plist args-plist)))
+    (org-combine-plists org-commentary--cli-args-defaults-plist
+                        args-plist)))
 
 (defun org-commentary--usage (&optional exit-code)
   "Display `org-commentary' usage information and exit.
