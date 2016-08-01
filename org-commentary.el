@@ -4,7 +4,7 @@
 
 ;; Author: Sergei Maximov <s.b.maximov@gmail.com>
 ;; Created: 20 Jul 2016
-;; Version: 0.2.1
+;; Version: 0.3.0
 ;; Package-Requires: ((dash "2.0") (emacs "24.4") (org "8.0"))
 ;; Keywords: convenience, docs, tools
 ;; URL: https://github.com/smaximov/org-commentary
@@ -377,7 +377,7 @@
 
 ;;; Change Log:
 
-;; HEAD
+;; v0.3.0
 ;; ════
 
 ;;   • rename the package to `org-commentary'.
@@ -397,7 +397,7 @@
 (require 'org-commentary-headers)
 (require 'org-commentary-util)
 
-(defconst org-commentary-version "0.2.1")
+(defconst org-commentary-version "0.3.0")
 
 (defun org-commentary-update (section-name org elisp &optional ext-plist)
   "Update library headers using the content of an Org document.
