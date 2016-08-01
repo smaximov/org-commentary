@@ -94,8 +94,8 @@ Provided =org-commentary= is installed via the built-in package manager, you can
 invoke it from the shell like this:
 
 #+begin_src bash
-  $ emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f org-commentary -- \
-      [OPTION]... ORG-FILE ELISP-FILE
+  $ emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f \
+      org-commentary -- [OPTION]... ORG-FILE ELISP-FILE
 #+end_src
 
 For example, to see available options, run

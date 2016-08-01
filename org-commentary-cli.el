@@ -82,8 +82,8 @@ Usage:
     cask exec org-commentary [OPTION]... ORG-FILE ELISP-FILE
 
 Usage (without Cask):
-    emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f org-commentary -- \\
-        [OPTION]... ORG-FILE ELISP-FILE
+    emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f \\
+        org-commentary -- [OPTION]... ORG-FILE ELISP-FILE
 
 Flags:
     -h, --help       display this message

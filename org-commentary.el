@@ -167,8 +167,8 @@
 ;;   manager, you can invoke it from the shell like this:
 
 ;;   ┌────
-;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f org-commentary -- \
-;;   │     [OPTION]... ORG-FILE ELISP-FILE
+;;   │ $ emacs -Q --batch --eval '(package-initialize)' -l org-commentary-cli -f \
+;;   │     org-commentary -- [OPTION]... ORG-FILE ELISP-FILE
 ;;   └────
 
 ;;   For example, to see available options, run
