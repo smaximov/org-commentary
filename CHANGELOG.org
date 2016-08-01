@@ -1,4 +1,6 @@
 #+OPTIONS: num:nil toc:nil
+* HEAD
+- signal =user-error= instead of =error= on malformed headers.
 * v0.3.0
 - rename the package to =org-commentary=.
 - use '-' as a namespace separator (instead of ':').

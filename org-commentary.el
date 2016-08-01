@@ -377,6 +377,12 @@
 
 ;;; Change Log:
 
+;; HEAD
+;; ════
+
+;;   • signal `user-error' instead of `error' on malformed headers.
+
+
 ;; v0.3.0
 ;; ══════
 

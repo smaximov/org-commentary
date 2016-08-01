@@ -79,7 +79,8 @@ SECTION-REGEXP is a regexp matching section's name."
 (defun org-commentary--validate-section! (section)
   "Check if SECTION is one of '(changelog commentary)', signal an error otherwise."
   (unless (memq section org-commentary--sections)
-    (error "Unkown section `%s'.  Valid sections are `changelog' and `commentary'" section)))
+    (user-error "Unkown section `%s'.  Valid sections are `changelog' and `commentary'"
+                section)))
 
 (defun org-commentary--headline-regexp (section)
   "Return headline regexp for SECTION."
@@ -102,7 +103,7 @@ If START is nil, it defaults to (point-min)."
       (save-match-data
         (goto-char (or start (point-min)))
         (or (re-search-forward headline-regexp nil t)
-            (error "Section `%s' is not found" section))))))
+            (user-error "Section `%s' is not found" section))))))
 
 (defun org-commentary--section-content-end (section start)
   "Return the position at the end of SECTION content.
@@ -117,9 +118,9 @@ The value START should be obtained by invoking
       (save-match-data
         (goto-char start)
         (when (re-search-forward headline-regexp nil t)
-          (error "Section `%s' has duplicate headlines" section))
+          (user-error "Section `%s' has duplicate headlines" section))
         (unless (re-search-forward terminate-regexp nil t)
-          (error "Section `%s' is unterminated" section))
+          (user-error "Section `%s' is unterminated" section))
         (match-beginning 0)))))
 
 (defun org-commentary--update-comment-header (section content)

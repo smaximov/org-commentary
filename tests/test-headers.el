@@ -105,7 +105,7 @@
                     (org-commentary--section-content-end 'changelog
                                                          (org-commentary--section-content-start
                                                           'changelog))))
-                :to-throw 'error)))))
+                :to-throw 'user-error)))))
 
 (describe "Update headers"
   (it "should update buffer headers"
