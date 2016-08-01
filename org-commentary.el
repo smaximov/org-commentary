@@ -378,7 +378,7 @@
 ;;; Change Log:
 
 ;; v0.3.0
-;; ════
+;; ══════
 
 ;;   • rename the package to `org-commentary'.
 ;;   • use '-' as a namespace separator (instead of ':').
