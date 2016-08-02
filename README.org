@@ -3,6 +3,8 @@
 * org-commentary
 
 :NOEXPORT:
+[[http://melpa.org/#/org-commentary][file:http://melpa.org/packages/org-commentary-badge.svg]]
+[[http://stable.melpa.org/#/org-commentary][file:http://stable.melpa.org/packages/org-commentary-badge.svg]]
 [[http://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
 [[https://travis-ci.org/smaximov/org-commentary][https://travis-ci.org/smaximov/org-commentary.svg?branch=master]]
 [[https://coveralls.io/github/smaximov/org-commentary?branch=master][https://coveralls.io/repos/github/smaximov/org-commentary/badge.svg?branch=master]]
