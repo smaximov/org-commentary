@@ -34,7 +34,23 @@ of a [[https://github.com/cask/cask][Cask]]-managed project.
 
 *** MELPA
 
-WIP.
+=org-commentary= is available on both MELPA and MELPA Stable. Enable the corresponding
+repository by adding an entry to =package-archives=:
+
+#+begin_src elisp
+  (require 'package)
+  ;; you can enable MELPA Stable instead:
+  ;; (add-to-list 'package-archives
+  ;;              '("melpa-stable" . "https://stable.melpa.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/"))
+  (package-initialize)
+#+end_src
+
+See the [[https://melpa.org/#/getting-started][documentation]] on more details about setting up MELPA repositories.
+
+To install =org-commentary= use Emacs' package menu at ~M-x list-packages~ or run
+~M-x package-install RET org-commentary RET~.
 
 ** Getting started
 
